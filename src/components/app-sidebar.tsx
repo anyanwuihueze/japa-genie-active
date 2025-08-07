@@ -10,7 +10,7 @@ import {
   SidebarFooter,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import { Logo } from '@/components/icons';
+import { JapaGenieLogo } from '@/components/icons';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -43,7 +43,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <Logo className="w-8 h-8 text-primary" />
+          <JapaGenieLogo className="w-8 h-8 text-primary" />
           <div className="flex flex-col">
             <h2 className="text-lg font-semibold text-sidebar-foreground">Japa Genie</h2>
             <p className="text-xs text-sidebar-foreground/70">Your Visa Guide</p>

@@ -4,7 +4,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Logo } from '@/components/icons';
+import { JapaGenieLogo } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
@@ -44,7 +44,7 @@ export function AppHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/dashboard" className="mr-6 flex items-center gap-2">
-          <Logo className="w-8 h-8 text-primary" />
+          <JapaGenieLogo className="w-8 h-8 text-primary" />
           <span className="font-bold text-lg">Japa Genie</span>
         </Link>
 
@@ -63,7 +63,7 @@ export function AppHeader() {
             <SheetContent side="left">
                 <div className="p-4">
                      <Link href="/dashboard" className="mb-8 flex items-center gap-2">
-                        <Logo className="w-8 h-8 text-primary" />
+                        <JapaGenieLogo className="w-8 h-8 text-primary" />
                         <span className="font-bold text-lg">Japa Genie</span>
                     </Link>
                     <NavLinks className="flex-col items-start gap-6 text-lg" />
