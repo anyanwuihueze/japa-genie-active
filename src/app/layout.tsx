@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/app-sidebar';
-import { Toaster } from '@/components/ui/toaster';
+import type {Metadata} from 'next';
+import './globals.css'; // Styles from globals.css will apply
+import { Toaster } from "@/components/ui/toaster";
+import { AppHeader } from '@/components/layout/app-header';
+import { AppFooter } from '@/components/layout/app-footer'; // Import the footer
 
 export const metadata: Metadata = {
-  title: 'Japa Genie',
-  description: 'Your AI-powered guide to seamless visa applications.',
+  title: 'Japa Genie: Your AI-Powered Visa Guide',
+  description: 'Stop getting scammed by visa agents. Start getting real results today with Japa Genie. AI-powered visa guidance, eligibility checks, and personalized roadmaps.',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="h-full dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -24,15 +24,10 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-body antialiased">
-        <SidebarProvider>
-          <div className="flex min-h-screen">
-            <AppSidebar />
-            <SidebarInset className="flex-1 flex flex-col">
-              <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
-            </SidebarInset>
-          </div>
-        </SidebarProvider>
+      <body className="font-body antialiased h-full flex flex-col bg-background text-foreground">
+        <AppHeader />
+        <main className="flex-grow overflow-y-auto p-4 md:p-6 lg:p-8">{children}</main>
+        <AppFooter />
         <Toaster />
       </body>
     </html>
