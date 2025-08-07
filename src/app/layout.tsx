@@ -26,7 +26,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased h-full flex flex-col bg-background text-foreground">
         <AppHeader />
-        <main className="flex-grow overflow-y-auto p-4 md:p-6 lg:p-8">{children}</main>
+        <main className="flex-grow overflow-y-auto">{children}</main>
         <AppFooter />
         <Toaster />
       </body>
