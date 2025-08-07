@@ -1,89 +1,75 @@
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Bot, Map, BarChart3, CheckCircle, Sparkles, DollarSign } from 'lucide-react';
-import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Target, BarChart, Clock, CheckCircle, Building2, Users, ArrowRight } from 'lucide-react';
 
 const features = [
   {
-    icon: Sparkles,
-    title: 'Personalized Visa Recommendations',
-    description: 'Our AI analyzes your profile to suggest the best visa options, complete with estimated costs, processing times, and success rates.',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      hint: 'data analysis',
-    },
+    icon: Target,
+    title: 'AI Visa Matchmaker',
+    description: 'Get matched to countries with highest acceptance rates for YOUR specific profile, qualifications, and budget.',
   },
   {
-    icon: Bot,
-    title: 'AI Chat Assistant',
-    description: 'Get real-time answers to all your visa-related questions, 24/7. Our AI assistant is trained on a vast knowledge base of immigration data.',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      hint: 'robot chat',
-    },
+    icon: BarChart,
+    title: 'Real-Time Success Rates',
+    description: 'Live data on visa acceptance rates, processing times, and costs updated by our AI agents daily.',
   },
   {
-    icon: Map,
-    title: 'Interactive Progress Map',
-    description: 'Visually track every stage of your application. Understand what to expect at each step, from document submission to visa approval.',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      hint: 'travel map',
-    },
+    icon: Clock,
+    title: 'Visual Progress Tracking',
+    description: 'See exactly where you are in your journey with our interactive progress map. No more guessing.',
   },
   {
     icon: CheckCircle,
-    title: 'AI Document Checker',
-    description: 'Avoid common pitfalls. Upload your documents, and our AI will check for completeness and correct formatting, ensuring a smooth submission.',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      hint: 'document verification',
-    },
+    title: '24/7 AI Guidance',
+    description: 'Get instant answers to your visa questions. No more waiting for consultants or outdated forums.',
   },
   {
-    icon: BarChart3,
-    title: 'Insights Canvas',
-    description: 'Dive deep into your options with interactive charts and graphs. Visualize cost breakdowns and compare visa success chances effortlessly.',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      hint: 'financial chart',
-    },
+    icon: Building2,
+    title: 'Jobs in Demand',
+    description: 'Discover which skills are most wanted in your target countries and how to position yourself.',
   },
   {
-    icon: DollarSign,
-    title: 'Transparent Pricing',
-    description: 'No hidden fees. Choose a subscription plan that fits your needs with clear, upfront pricing. Start with our free plan to explore core features.',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      hint: 'money savings',
-    },
+    icon: Users,
+    title: 'Rejection Recovery',
+    description: 'Been rejected before? Our AI analyzes why and creates a comeback strategy that works.',
   },
 ];
 
 export default function FeaturesPage() {
   return (
-    <div className="space-y-12">
-      <header className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Features Crafted for You</h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-          Japa Genie is packed with powerful, AI-driven tools to make your visa application process as simple and stress-free as possible.
-        </p>
-      </header>
+    <div className="py-12 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="text-center space-y-4 mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-primary">
+            Everything You Need to Succeed
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            Built specifically for African professionals who refuse to settle for rejection.
+          </p>
+        </header>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {features.map((feature, index) => (
-          <Card key={index} className="flex flex-col overflow-hidden transition-all hover:scale-105 hover:shadow-xl">
-            <div className="relative h-48 w-full">
-               <Image src={feature.image.src} alt={feature.title} layout="fill" objectFit="cover" data-ai-hint={feature.image.hint} />
-            </div>
-            <CardHeader className="flex-1">
-              <div className="flex items-center gap-4 mb-2">
-                <feature.icon className="w-8 h-8 text-primary flex-shrink-0" />
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <Card key={index} className="flex flex-col text-center items-center p-8 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="mb-4 bg-primary/10 text-primary rounded-full p-3">
+                <feature.icon className="w-8 h-8" />
               </div>
-              <CardDescription>{feature.description}</CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
+              <CardHeader className="p-0">
+                <CardTitle className="text-xl mb-2">{feature.title}</CardTitle>
+                <CardDescription className="text-base">{feature.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <Button asChild size="lg" className="bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-10 py-6 text-lg font-bold">
+            <Link href="/dashboard">
+              Explore All Features <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
