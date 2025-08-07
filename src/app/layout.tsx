@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css'; // Styles from globals.css will apply
 import { Toaster } from "@/components/ui/toaster";
 import { AppHeader } from '@/components/layout/app-header';
-import { AppFooter } from '@/components/layout/app-footer'; // Import the footer
+import { AppFooter } from '@/components/layout/app-footer';
 
 export const metadata: Metadata = {
   title: 'Japa Genie: Your AI-Powered Visa Guide',
@@ -25,9 +25,11 @@ export default function RootLayout({
         ></link>
       </head>
       <body className="font-body antialiased h-full flex flex-col bg-background text-foreground">
-        <AppHeader />
-        <main className="flex-grow overflow-y-auto">{children}</main>
-        <AppFooter />
+        <div className="flex flex-col min-h-screen">
+            <AppHeader />
+            <main className="flex-grow container py-8">{children}</main>
+            <AppFooter />
+        </div>
         <Toaster />
       </body>
     </html>
