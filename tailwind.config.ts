@@ -10,9 +10,9 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
       screens: {
-        "2xl": "1400px",
+        '2xl': '1400px',
       },
     },
     extend: {
@@ -72,6 +72,9 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        'genie-gold': '#F59E0B',
+        'text-dark': '#1E293B',
+        'text-light': '#F8FAFC',
       },
       borderRadius: {
         lg: 'var(--radius)',
