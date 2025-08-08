@@ -3,6 +3,8 @@ import './globals.css'; // Styles from globals.css will apply
 import { Toaster } from "@/components/ui/toaster";
 import { AppHeader } from '@/components/layout/app-header';
 import { AppFooter } from '@/components/layout/app-footer';
+import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
 
 export const metadata: Metadata = {
   title: 'Japa Genie: Your AI-Powered Visa Guide',
@@ -25,11 +27,14 @@ export default function RootLayout({
         ></link>
       </head>
       <body className="font-body antialiased h-full flex flex-col bg-background text-foreground">
-        <div className="flex flex-col min-h-screen">
-            <AppHeader />
-            <main className="flex-grow container py-8">{children}</main>
-            <AppFooter />
-        </div>
+        <SidebarProvider>
+            <AppSidebar />
+            <div className="flex flex-col flex-1">
+                <AppHeader />
+                <main className="flex-grow container py-8">{children}</main>
+                <AppFooter />
+            </div>
+        </SidebarProvider>
         <Toaster />
       </body>
     </html>
