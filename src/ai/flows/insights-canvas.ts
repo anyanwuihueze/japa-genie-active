@@ -25,7 +25,7 @@ const VisaInsightsOutputSchema = z.object({
       approvalChance: z.number().describe('Estimated approval chance (0-100).'),
       processingTime: z.string().describe('Estimated processing time (e.g., months).'),
     })
-  ).describe('Array of potential visa options with costs, approval chances and processing times.'),
+  ).describe('Array of at least 3 potential visa options with costs, approval chances and processing times.'),
   costEstimates: z.object({
     applicationFees: z.number().describe('Estimated application fees in USD.'),
     legalFees: z.number().describe('Estimated legal fees in USD.'),
@@ -44,19 +44,30 @@ const prompt = ai.definePrompt({
   name: 'visaInsightsPrompt',
   input: {schema: VisaInsightsInputSchema},
   output: {schema: VisaInsightsOutputSchema},
-  prompt: `You are an AI assistant designed to provide personalized visa insights based on user information.
+  prompt: `You are an expert AI visa consultant. Your task is to provide personalized visa insights based on the user's profile, intended destination, and budget.
 
-  Analyze the user's profile, intended destination, and budget to generate the following:
+  Analyze the provided information and generate a structured response with the following components:
 
-  - visaOptions: A list of potential visa options for the user, including the visa type, estimated cost in USD, estimated approval chance (0-100), and estimated processing time.
-  - costEstimates: Detailed cost estimates for the visa application process, including application fees, legal fees, other potential expenses, and the total estimated cost in USD.
-  - insightsSummary: A summary of the user profile with suggestions on visa paths forward.
+  1. "visaOptions": Create a JSON array of at least three potential visa options. For each option, include:
+      - "visaType" (string): The specific name of the visa (e.g., "Express Entry - Federal Skilled Worker", "Student Permit", "Intra-Company Transfer Visa").
+      - "estimatedCost" (number): The estimated total cost for this visa type in USD.
+      - "approvalChance" (number): A realistic estimated approval percentage (from 0 to 100).
+      - "processingTime" (string): The estimated time it will take to process this visa (e.g., "6-8 months", "12-18 months").
 
-  User Profile: {{{profile}}}
-  Destination: {{{destination}}}
-  Budget: {{{budget}}}
+  2. "costEstimates": Create a JSON object detailing the estimated costs. This should include:
+      - "applicationFees" (number): Estimated government application fees in USD.
+      - "legalFees" (number): Estimated fees for legal assistance, if applicable, in USD.
+      - "otherExpenses" (number): Other potential expenses like biometrics, medical exams, and travel in USD.
+      - "totalCost" (number): The sum of all estimated costs in USD.
 
-  Ensure that the visaOptions array contains at least 3 options.  The estimated costs should be realistic based on the type of visa.
+  3. "insightsSummary": Write a concise summary of the user's profile. Highlight their strengths and suggest the most promising visa paths based on their qualifications and budget.
+
+  User Information:
+  - Profile: {{{profile}}}
+  - Destination: {{{destination}}}
+  - Budget (USD): {{{budget}}}
+
+  Provide a realistic and helpful analysis to guide the user's visa application journey.
   `,
 });
 
