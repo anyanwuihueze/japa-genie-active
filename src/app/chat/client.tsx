@@ -65,7 +65,7 @@ export default function ChatClient() {
 
 
   return (
-    <div className="flex flex-col flex-1 bg-card rounded-lg border">
+    <div className="flex flex-col flex-1 bg-card rounded-lg border h-full">
       <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
         <div className="space-y-6">
           {messages.map((message, index) => (

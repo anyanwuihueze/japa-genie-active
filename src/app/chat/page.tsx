@@ -4,14 +4,14 @@ import { Sparkles } from 'lucide-react';
 
 export default function ChatPage() {
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
+    <div className="flex flex-col h-full">
       <header className="p-4 border-b">
         <h1 className="text-2xl font-bold tracking-tight">AI Chat Assistant</h1>
         <p className="text-sm text-muted-foreground">
           Ask me anything about the visa application process.
         </p>
       </header>
-      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4">
+      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4 overflow-hidden">
         <div className="md:col-span-2 h-full flex flex-col">
           <ChatClient />
         </div>
