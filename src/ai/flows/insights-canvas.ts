@@ -77,35 +77,11 @@ const generateVisaInsightsFlow = ai.defineFlow(
     inputSchema: VisaInsightsInputSchema,
     outputSchema: VisaInsightsOutputSchema,
   },
-  async (input) => {
-    try {
-      console.log('Generating insights for:', input);
-      const { output } = await prompt(input);
-
-      if (!output) {
-        throw new Error('AI model did not return an output.');
-      }
-
-      // Validate the output against the Zod schema
-      const parsedOutput = VisaInsightsOutputSchema.parse(output);
-      
-      console.log('Successfully generated and validated insights.');
-      return parsedOutput;
-
-    } catch (error) {
-      console.error('Error in generateVisaInsightsFlow:', error);
-      
-      if (error instanceof z.ZodError) {
-        // The AI output didn't match the expected schema
-        throw new Error(
-          'The AI returned data in an unexpected format. Please try rephrasing your profile details or try again later.'
-        );
-      }
-      
-      // Handle other potential errors (e.g., API errors)
-      throw new Error(
-        'Failed to generate visa insights due to a technical issue. Please try again later.'
-      );
+  async input => {
+    const {output} = await prompt(input);
+    if (!output) {
+      throw new Error('Failed to generate visa insights. The AI model did not return a valid response.');
     }
+    return output;
   }
 );
