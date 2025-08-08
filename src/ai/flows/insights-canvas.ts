@@ -69,6 +69,18 @@ const prompt = ai.definePrompt({
 
   Provide a realistic and helpful analysis to guide the user's visa application journey.
   `,
+  config: {
+    safetySettings: [
+      {
+        category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+        threshold: 'BLOCK_NONE',
+      },
+      {
+        category: 'HARM_CATEGORY_HARASSMENT',
+        threshold: 'BLOCK_NONE',
+      },
+    ],
+  },
 });
 
 const generateVisaInsightsFlow = ai.defineFlow(
