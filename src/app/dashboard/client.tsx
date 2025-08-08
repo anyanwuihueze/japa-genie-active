@@ -263,7 +263,7 @@ export default function DashboardClient() {
               <CardHeader>
                 <CardTitle>Estimated Cost Breakdown</CardTitle>
                 <CardDescription>Total: ${insights.costEstimates.totalCost.toLocaleString()}</CardDescription>
-              </CardHeader>
+              </Header>
               <CardContent>
                 <ChartContainer config={chartConfig} className="h-64 mx-auto">
                   <PieChart>
@@ -325,3 +325,5 @@ export default function DashboardClient() {
     </div>
   );
 }
+
+    
