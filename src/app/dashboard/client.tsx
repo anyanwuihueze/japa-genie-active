@@ -48,8 +48,8 @@ export default function DashboardClient() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     setError(null);
-    setInsights(null);
     try {
+      setInsights(null);
       const result = await generateVisaInsights(values);
       setInsights(result);
     } catch (e) {
