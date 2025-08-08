@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Bot, Loader2, Send, User } from 'lucide-react';
+import { JapaGenieLogo } from '@/components/icons';
+import { Loader2, Send, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -64,7 +65,7 @@ export default function ChatClient() {
 
 
   return (
-    <div className="flex flex-col flex-1 bg-card rounded-lg m-4">
+    <div className="flex flex-col flex-1 bg-card rounded-lg border">
       <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
         <div className="space-y-6">
           {messages.map((message, index) => (
@@ -78,7 +79,7 @@ export default function ChatClient() {
               {message.role === 'assistant' && (
                 <Avatar className="w-8 h-8">
                   <AvatarFallback className="bg-primary text-primary-foreground">
-                    <Bot size={20} />
+                    <JapaGenieLogo className="w-5 h-5" />
                   </AvatarFallback>
                 </Avatar>
               )}
@@ -105,7 +106,7 @@ export default function ChatClient() {
             <div className="flex items-start gap-4 justify-start">
                <Avatar className="w-8 h-8">
                   <AvatarFallback className="bg-primary text-primary-foreground">
-                    <Bot size={20} />
+                    <JapaGenieLogo className="w-5 h-5" />
                   </AvatarFallback>
                 </Avatar>
               <div className="bg-muted p-3 rounded-xl flex items-center gap-2">
