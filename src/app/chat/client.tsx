@@ -5,11 +5,12 @@ import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { JapaGenieLogo } from '@/components/icons';
 import { Loader2, Send, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { streamToGenerator } from 'ai';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -30,16 +31,30 @@ export default function ChatClient() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-
+  
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
-
+  
+    // Add an empty assistant message to update
+    setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
+  
     try {
-      const result = await visaChatAssistant({ question: input });
-      const assistantMessage: Message = { role: 'assistant', content: result.answer };
-      setMessages((prev) => [...prev, assistantMessage]);
+      const stream = await visaChatAssistant({ question: input });
+      const generator = streamToGenerator(stream);
+  
+      let text = '';
+      for await (const delta of generator) {
+        if (typeof delta === 'string') {
+          text += delta;
+          setMessages((prevMessages) => {
+            const newMessages = [...prevMessages];
+            newMessages[newMessages.length - 1].content = text;
+            return newMessages;
+          });
+        }
+      }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred.';
       toast({
@@ -47,13 +62,17 @@ export default function ChatClient() {
         title: 'Chat Error',
         description: errorMessage,
       });
-      const errorMessageObj: Message = { role: 'assistant', content: `Sorry, I encountered an error: ${errorMessage}` };
-      setMessages((prev) => [...prev, errorMessageObj]);
+      setMessages((prevMessages) => {
+        const newMessages = [...prevMessages];
+        const content = `Sorry, I encountered an error: ${errorMessage}`;
+        newMessages[newMessages.length - 1].content = content;
+        return newMessages;
+      });
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   useEffect(() => {
     if (scrollAreaRef.current) {
         scrollAreaRef.current.scrollTo({
@@ -86,11 +105,18 @@ export default function ChatClient() {
               <div
                 className={cn(
                   'max-w-md p-3 rounded-xl',
-                  message.role === 'user'
+                   message.role === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
+                    : 'bg-muted',
+                   isLoading && index === messages.length -1 && 'flex items-center gap-2'
                 )}
               >
+                 {isLoading && index === messages.length - 1 && !message.content && (
+                    <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span className="text-sm text-muted-foreground">Thinking...</span>
+                    </>
+                 )}
                 <p className="text-sm whitespace-pre-wrap">{message.content}</p>
               </div>
               {message.role === 'user' && (
@@ -102,19 +128,6 @@ export default function ChatClient() {
               )}
             </div>
           ))}
-          {isLoading && (
-            <div className="flex items-start gap-4 justify-start">
-               <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-primary text-primary-foreground">
-                    <JapaGenieLogo className="w-5 h-5" />
-                  </AvatarFallback>
-                </Avatar>
-              <div className="bg-muted p-3 rounded-xl flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Thinking...</span>
-              </div>
-            </div>
-          )}
         </div>
       </ScrollArea>
       <div className="p-4 border-t">
