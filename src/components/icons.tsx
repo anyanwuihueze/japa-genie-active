@@ -18,7 +18,6 @@ export function JapaGenieLogo(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 68.61 122.88"
       xmlSpace="preserve"
       {...props}
-      className={cn("genie-logo-svg", props.className)}
     >
       <g>
         <path
