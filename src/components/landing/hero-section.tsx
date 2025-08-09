@@ -15,11 +15,9 @@ export function HeroSection() {
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
         {/*
-          This path assumes you have a 'videos' folder inside your 'public' directory,
-          and your video file is named 'hero-video.mp4'.
-          The final path will be /videos/hero-video.mp4
+          This path assumes you have a 'videos' folder inside your 'public' directory.
         */}
-        <source src="/videos/hero-video.mp4" type="video/mp4" />
+        <source src="/videos/Extreme_closeup_of_202506211607_orzt4.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
