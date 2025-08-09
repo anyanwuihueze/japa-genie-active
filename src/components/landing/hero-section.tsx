@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
+import { JapaGenieLogo } from "../icons";
 
 export function HeroSection() {
   return (
@@ -21,7 +22,8 @@ export function HeroSection() {
       {/* Add an overlay to darken the video and make text more readable */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10"></div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center flex flex-col items-center">
+        <JapaGenieLogo className="w-24 h-24 text-amber-400 mb-6 animate-pulse" />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
           STOP Getting Scammed by Fake Visa Agents. START Getting Real Results.
         </h1>

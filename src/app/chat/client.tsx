@@ -96,7 +96,7 @@ export default function ChatClient() {
             >
               {message.role === 'assistant' && (
                 <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-primary text-primary-foreground">
+                  <AvatarFallback className="bg-primary text-amber-400">
                     <JapaGenieLogo className="w-5 h-5" />
                   </AvatarFallback>
                 </Avatar>
