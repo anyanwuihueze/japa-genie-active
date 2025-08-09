@@ -24,7 +24,7 @@ export function HeroSection() {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center flex flex-col items-center">
         <div className="mb-6">
-          <div className="animate-pulse">
+          <div className="animate-glow rounded-full">
             <JapaGenieLogo className="w-24 h-24 text-amber-400" />
           </div>
         </div>
