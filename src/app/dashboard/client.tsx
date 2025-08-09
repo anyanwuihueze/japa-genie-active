@@ -30,7 +30,7 @@ type SortKey = 'visaType' | 'estimatedCost' | 'approvalChance' | 'processingTime
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(() => {
-      reject(new Error(`Request timed out after ${ms}ms`));
+      reject(new Error(`Request timed out after ${ms}ms. The AI is likely still working, please try again shortly.`));
     }, ms);
 
     promise.then(
@@ -69,11 +69,10 @@ export default function DashboardClient() {
     setError(null);
     setInsights(null);
     try {
-      const result = await withTimeout(generateVisaInsights(values), 30000);
-      console.log('Received insights result:', result);
+      // It's critical to have a timeout because complex generation can take time.
+      const result = await withTimeout(generateVisaInsights(values), 45000); // 45 second timeout
       setInsights(result);
     } catch (e) {
-      console.error("Failed to generate insights:", e);
       const errorMessage = e instanceof Error ? e.message : 'An unexpected error occurred.';
       setError(errorMessage);
       toast({
@@ -325,5 +324,3 @@ export default function DashboardClient() {
     </div>
   );
 }
-
-    
