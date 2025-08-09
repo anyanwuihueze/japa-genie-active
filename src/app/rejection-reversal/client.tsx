@@ -173,9 +173,10 @@ export default function RejectionReversalClient() {
         )}
 
         {isLoading && !strategy && (
-            <Card className='h-96 flex flex-col items-center justify-center'>
-                <div className='text-center text-muted-foreground p-8 space-y-4'>
-                     <Repeat className="mx-auto h-12 w-12 animate-spin text-primary/50" />
+            <Card className='h-96 flex flex-col items-center justify-center relative overflow-hidden'>
+                <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-primary/10 to-transparent"></div>
+                <div className='text-center text-muted-foreground p-8 space-y-4 z-10'>
+                     <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary/50" />
                      <p>Building your personalized comeback strategy... This may take a moment.</p>
                 </div>
             </Card>
@@ -196,8 +197,9 @@ export default function RejectionReversalClient() {
           </Card>
         ) : (
             !isLoading && (
-            <Card className='h-96 flex flex-col items-center justify-center bg-primary/5 border-dashed'>
-                <div className='text-center text-muted-foreground p-8 space-y-2'>
+            <Card className='h-96 flex flex-col items-center justify-center bg-primary/5 border-dashed relative overflow-hidden'>
+                <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                <div className='text-center text-muted-foreground p-8 space-y-2 z-10'>
                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mb-4">
                         <Repeat className="h-6 w-6 text-primary" />
                     </div>
