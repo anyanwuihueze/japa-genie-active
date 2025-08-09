@@ -99,8 +99,14 @@ export default {
           },
         },
         'glow': {
-          '0%, 100%': { boxShadow: '0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--accent))' },
-          '50%': { boxShadow: '0 0 20px hsl(var(--accent)), 0 0 40px hsl(var(--accent))' },
+          '0%, 100%': { 
+            transform: 'scale(1)',
+            boxShadow: '0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--accent))' 
+          },
+          '50%': { 
+            transform: 'scale(1.1)',
+            boxShadow: '0 0 20px hsl(var(--accent)), 0 0 40px hsl(var(--accent))' 
+          },
         }
       },
       animation: {
