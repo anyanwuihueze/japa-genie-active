@@ -14,9 +14,6 @@ export function HeroSection() {
         playsInline
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
-        {/*
-          This path assumes you have a 'videos' folder inside your 'public' directory.
-        */}
         <source src="/videos/Extreme_closeup_of_202506211607_orzt4.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -34,17 +31,17 @@ export function HeroSection() {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
             size="lg"
-            className="group bg-gradient-to-r from-genie-gold to-red-500 hover:from-red-500 hover:to-genie-gold text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="group bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-10 py-6 text-lg font-bold"
             asChild
           >
-            <Link href="/chat" className="flex items-center gap-2">
+            <Link href="/dashboard" className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 group-hover:rotate-12 transition-transform" />
               <span>Start Your Journey</span>
             </Link>
           </Button>
           <Button
             variant="link"
-            className="text-white hover:text-genie-gold text-lg group flex items-center gap-1"
+            className="text-white hover:text-amber-400 text-lg group flex items-center gap-1"
             asChild
           >
             <Link href="/how-it-works">
