@@ -6,7 +6,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-gradient-to-br from-[#0f172a] via-[#4338ca] to-[#f59e0b] relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-slate-900 relative overflow-hidden">
       <video 
         autoPlay 
         loop 
