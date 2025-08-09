@@ -20,10 +20,11 @@ import {
   Rocket,
   Star,
   DollarSign,
+  MessageCircleQuestion,
 } from 'lucide-react';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/interview', label: 'Mock Interview', icon: MessageCircleQuestion },
   { href: '/progress', label: 'Progress Map', icon: Map },
   { href: '/document-check', label: 'Document Checker', icon: CheckCircle2 },
   { href: '/chat', label: 'AI Assistant', icon: Bot },
