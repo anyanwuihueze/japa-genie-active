@@ -3,9 +3,9 @@ import { cn } from '@/lib/utils';
 
 export function JapaGenieLogo(props: SVGProps<SVGSVGElement>) {
   const st0Style: React.CSSProperties = {
+    fill: 'currentColor',
     fillRule: 'evenodd',
     clipRule: 'evenodd',
-    fill: '#FFC107', // Using accent color directly
   };
 
   return (

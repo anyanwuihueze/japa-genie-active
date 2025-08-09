@@ -57,7 +57,7 @@ export function AppHeader() {
           <SidebarTrigger />
         </div>
         <Link href="/" className="mr-6 flex items-center gap-2">
-          <JapaGenieLogo className="w-7 h-7" />
+          <JapaGenieLogo className="w-7 h-7 text-amber-400" />
           <span className="font-bold text-lg hidden sm:inline-block">Japa Genie</span>
         </Link>
 
