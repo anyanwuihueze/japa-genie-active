@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full dark">
+    <html lang="en" className="h-full">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -29,11 +29,13 @@ export default function RootLayout({
       <body className="font-body antialiased h-full flex flex-col bg-background text-foreground">
         <SidebarProvider>
             <AppSidebar />
-            <div className="flex flex-col flex-1">
-                <AppHeader />
-                <main className="flex-grow container py-8">{children}</main>
-                <AppFooter />
-            </div>
+            <SidebarInset>
+              <div className="flex flex-col flex-1 h-full">
+                  <AppHeader />
+                  <main className="flex-grow container py-8">{children}</main>
+                  <AppFooter />
+              </div>
+            </SidebarInset>
         </SidebarProvider>
         <Toaster />
       </body>

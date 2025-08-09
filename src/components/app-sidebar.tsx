@@ -8,20 +8,16 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
-  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { JapaGenieLogo } from '@/components/icons';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
-  BarChart2,
-  Bot,
-  CheckCircle2,
   LayoutDashboard,
   Map,
-  FileText,
+  CheckCircle2,
+  Bot,
   Rocket,
-  Flame,
   Star,
   DollarSign,
 } from 'lucide-react';
@@ -43,7 +39,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <JapaGenieLogo className="w-8 h-8 text-primary" />
+          <JapaGenieLogo className="w-8 h-8 text-accent" />
           <div className="flex flex-col">
             <h2 className="text-lg font-semibold text-sidebar-foreground">Japa Genie</h2>
             <p className="text-xs text-sidebar-foreground/70">Your Visa Guide</p>
