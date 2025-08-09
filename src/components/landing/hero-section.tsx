@@ -6,8 +6,27 @@ import { Sparkles, ArrowRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-gradient-to-br from-[#0f172a] via-[#4338ca] to-[#f59e0b] relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10 text-center">
+    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-gradient-to-br from-[#0f172a] via-[#4338ca] to-[#f59e0b] relative overflow-hidden">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
+      >
+        {/*
+          IMPORTANT: Replace this with the URL to your video. 
+          You can host it in a service like Cloudinary, or place it in your /public folder.
+          For example: <source src="/videos/hero-video.mp4" type="video/mp4" />
+        */}
+        <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Add an overlay to darken the video and make text more readable */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
           STOP Getting Scammed. START Getting Results.
         </h1>
