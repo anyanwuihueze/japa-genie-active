@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react';
+import { cn } from '@/lib/utils';
 
 export function JapaGenieLogo(props: SVGProps<SVGSVGElement>) {
   const st0Style: React.CSSProperties = {
@@ -16,8 +17,8 @@ export function JapaGenieLogo(props: SVGProps<SVGSVGElement>) {
       y="0px"
       viewBox="0 0 68.61 122.88"
       xmlSpace="preserve"
-      className={props.className ? `${props.className} genie-logo-svg` : "genie-logo-svg"}
       {...props}
+      className={cn("genie-logo-svg", props.className)}
     >
       <g>
         <path
