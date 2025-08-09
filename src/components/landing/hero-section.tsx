@@ -15,11 +15,11 @@ export function HeroSection() {
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
         {/*
-          IMPORTANT: Replace this with the URL to your video. 
-          You can host it in a service like Cloudinary, or place it in your /public folder.
-          For example: <source src="/videos/hero-video.mp4" type="video/mp4" />
+          This path assumes you have a 'videos' folder inside your 'public' directory,
+          and your video file is named 'hero-video.mp4'.
+          The final path will be /videos/hero-video.mp4
         */}
-        <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
