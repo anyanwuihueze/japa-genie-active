@@ -10,7 +10,7 @@ export function AppFooter() {
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-3 md:space-y-0">
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center group">
-              <JapaGenieLogo className="w-6 h-6 text-amber-400 group-hover:scale-105 transition-transform" />
+              <JapaGenieLogo className="w-6 h-6 group-hover:scale-105 transition-transform" />
               <span className="text-sm font-semibold text-primary group-hover:text-primary/90 transition-colors ml-1.5">
                 Japa Genie
               </span>
