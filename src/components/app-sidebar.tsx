@@ -39,7 +39,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <JapaGenieLogo className="w-8 h-8 text-accent" />
+          <JapaGenieLogo className="w-8 h-8 text-primary" />
           <div className="flex flex-col">
             <h2 className="text-lg font-semibold text-sidebar-foreground">Japa Genie</h2>
             <p className="text-xs text-sidebar-foreground/70">Your Visa Guide</p>
