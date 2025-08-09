@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
+import { generateInsights } from '@/ai/flows/insights-generator';
+import type { InsightOutput } from '@/ai/flows/insights-generator';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -17,7 +19,13 @@ interface Message {
   content: string;
 }
 
-export default function ChatClient() {
+interface ChatClientProps {
+    insights: InsightOutput | null;
+    onNewInsights: (insights: InsightOutput) => void;
+    onInsightsLoading: (loading: boolean) => void;
+}
+
+export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatClientProps) {
   const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -34,14 +42,19 @@ export default function ChatClient() {
   
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
+    const currentInput = input;
     setInput('');
     setIsLoading(true);
+    onInsightsLoading(true);
   
     // Add an empty assistant message to update
     setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
   
     try {
-      const stream = await visaChatAssistant({ question: input });
+        const [stream] = await Promise.all([
+            visaChatAssistant({ question: currentInput }),
+            generateInsights({ question: currentInput }).then(onNewInsights)
+        ]);
   
       let text = '';
       for await (const delta of readStreamableValue(stream)) {
@@ -69,6 +82,7 @@ export default function ChatClient() {
       });
     } finally {
       setIsLoading(false);
+      onInsightsLoading(false);
     }
   };
   
