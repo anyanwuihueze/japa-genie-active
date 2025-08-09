@@ -10,7 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { generateStream } from 'genkit/generate';
+import { generate } from 'genkit';
 
 const VisaChatAssistantInputSchema = z.object({
   question: z.string().describe('The user question about the visa application process.'),
@@ -27,10 +27,11 @@ const prompt = ai.definePrompt({
 });
 
 export async function visaChatAssistant(input: VisaChatAssistantInput) {
-  const {stream} = await generateStream({
-    prompt: prompt.prompt,
+  const {stream} = await generate({
+    prompt: prompt,
     input: input,
-    model: 'googleai/gemini-2.0-flash',
+    model: ai.getModel('googleai/gemini-2.0-flash'),
+    stream: true,
   });
 
   return stream;

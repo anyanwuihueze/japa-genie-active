@@ -10,7 +10,7 @@ import { JapaGenieLogo } from '@/components/icons';
 import { Loader2, Send, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import { streamToGenerator } from 'ai';
+import { readStreamableValue } from 'ai/rsc';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -42,10 +42,9 @@ export default function ChatClient() {
   
     try {
       const stream = await visaChatAssistant({ question: input });
-      const generator = streamToGenerator(stream);
   
       let text = '';
-      for await (const delta of generator) {
+      for await (const delta of readStreamableValue(stream)) {
         if (typeof delta === 'string') {
           text += delta;
           setMessages((prevMessages) => {
