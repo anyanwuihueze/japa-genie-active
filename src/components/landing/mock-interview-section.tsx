@@ -97,12 +97,6 @@ export function MockInterviewSection() {
           <TabsContent value="business"><p className="text-center text-muted-foreground">Business Visas content coming soon.</p></TabsContent>
           <TabsContent value="family"><p className="text-center text-muted-foreground">Family Reunification content coming soon.</p></TabsContent>
         </Tabs>
-        
-        <div className="text-center mt-20">
-             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-primary">
-                Real Results from Real Users
-            </h2>
-        </div>
       </div>
     </section>
   );
