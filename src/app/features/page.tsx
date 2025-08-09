@@ -57,6 +57,7 @@ export default function FeaturesPage() {
               </div>
               <CardHeader className="p-0">
                 <CardTitle className="text-xl mb-2">{feature.title}</CardTitle>
+
                 <CardDescription className="text-base">{feature.description}</CardDescription>
               </CardHeader>
             </Card>
