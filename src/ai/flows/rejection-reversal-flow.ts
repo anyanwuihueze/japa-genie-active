@@ -7,7 +7,7 @@
  * - RejectionStrategyOutput - The return type for the generateRejectionStrategy function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, geminiFlash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const RejectionStrategyInputSchema = z.object({
@@ -29,6 +29,7 @@ export async function generateRejectionStrategy(input: RejectionStrategyInput): 
 
 const prompt = ai.definePrompt({
   name: 'rejectionStrategyPrompt',
+  model: geminiFlash,
   input: {schema: RejectionStrategyInputSchema},
   output: {schema: RejectionStrategyOutputSchema},
   prompt: `You are an expert immigration consultant specializing in visa rejection analysis. Your task is to create a detailed, actionable comeback strategy for an applicant who was rejected.

@@ -7,7 +7,7 @@
  * - InterviewQuestionOutput - The return type for the generateInterviewQuestion function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, geminiFlash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const InterviewQuestionInputSchema = z.object({
@@ -29,6 +29,7 @@ export async function generateInterviewQuestion(input: InterviewQuestionInput): 
 
 const prompt = ai.definePrompt({
   name: 'interviewQuestionPrompt',
+  model: geminiFlash,
   input: {schema: InterviewQuestionInputSchema},
   output: {schema: InterviewQuestionOutputSchema},
   prompt: `You are an expert visa consular officer conducting a mock interview. Your task is to generate a single, realistic interview question.
