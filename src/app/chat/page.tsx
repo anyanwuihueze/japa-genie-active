@@ -121,24 +121,24 @@ export default function ChatPage() {
         </p>
       </header>
       <div className="flex-1 grid md:grid-cols-3 overflow-hidden">
-        <div className="md:col-span-2 h-full flex flex-col">
+        {/* Chat Pane */}
+        <div className="md:col-span-2 h-full flex flex-col overflow-y-auto">
           <ChatClient 
              insights={insights}
              onNewInsights={setInsights}
              onInsightsLoading={setInsightsLoading}
           />
         </div>
+        {/* Insights Pane */}
         <div className="hidden md:flex flex-col h-full overflow-hidden">
-           <Card className="flex-1 flex flex-col h-full">
+           <Card className="flex-1 flex flex-col h-full overflow-y-auto">
              <CardHeader className="flex flex-row items-center gap-2">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>
             </CardHeader>
-             <ScrollArea className="flex-1">
-                <div className="h-full">
-                    {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
-                </div>
-             </ScrollArea>
+            <div className="h-full">
+                {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
+            </div>
            </Card>
         </div>
       </div>
