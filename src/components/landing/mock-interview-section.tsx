@@ -4,7 +4,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CheckCircle, Video, FileText, Calendar, Briefcase, ArrowRight } from 'lucide-react';
+import { CheckCircle, Video, FileText, Calendar, Briefcase, ArrowRight, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 
 const interviewQuestions = [
@@ -84,24 +84,26 @@ export function MockInterviewSection() {
               </Card>
               <div className="grid sm:grid-cols-2 gap-6">
                 {features.map((feature) => (
-                    <Link href="/features" key={feature.title} className="block hover:shadow-lg transition-shadow rounded-lg">
-                        <Card className="text-center p-6 h-full">
-                            <div className="flex justify-center mb-4">
-                                <div className="p-3 bg-primary/10 rounded-full text-primary">
-                                    <feature.icon className="w-8 h-8"/>
-                                </div>
+                    <Card key={feature.title} className="text-center p-6 h-full flex flex-col group transition-all hover:shadow-lg hover:-translate-y-1">
+                        <div className="flex justify-center mb-4">
+                            <div className="p-3 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                                <feature.icon className="w-8 h-8"/>
                             </div>
-                            <h3 className="font-bold text-lg">{feature.title}</h3>
-                            <p className="text-sm text-muted-foreground">{feature.description}</p>
-                        </Card>
-                    </Link>
+                        </div>
+                        <h3 className="font-bold text-lg">{feature.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-4 flex-grow">{feature.description}</p>
+                        <Link href="/features" className="text-sm text-primary hover:underline flex items-center justify-center gap-1.5 font-medium mt-auto group-hover:text-amber-500 transition-colors">
+                            <LinkIcon className="w-3.5 h-3.5" />
+                            Learn More
+                        </Link>
+                    </Card>
                 ))}
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="work"><p className="text-center text-muted-foreground">Work Permits content coming soon.</p></TabsContent>
-          <TabsContent value="business"><p className="text-center text-muted-foreground">Business Visas content coming soon.</p></TabsContent>
-          <TabsContent value="family"><p className="text-center text-muted-foreground">Family Reunification content coming soon.</p></TabsContent>
+          <TabsContent value="work"><p className="text-center text-muted-foreground p-10">Work Permits content coming soon.</p></TabsContent>
+          <TabsContent value="business"><p className="text-center text-muted-foreground p-10">Business Visas content coming soon.</p></TabsContent>
+          <TabsContent value="family"><p className="text-center text-muted-foreground p-10">Family Reunification content coming soon.</p></TabsContent>
         </Tabs>
       </div>
     </section>
