@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
 import { generateInsights } from '@/ai/flows/insights-generator';
-import type { InsightOutput } from '@/ai/flows/insights-generator';
+import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -80,10 +80,13 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
 
   useEffect(() => {
     if (scrollAreaRef.current) {
-        scrollAreaRef.current.scrollTo({
-            top: scrollAreaRef.current.scrollHeight,
-            behavior: 'smooth'
-        });
+        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+        if (viewport) {
+            viewport.scrollTo({
+                top: viewport.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
     }
   }, [messages]);
 
