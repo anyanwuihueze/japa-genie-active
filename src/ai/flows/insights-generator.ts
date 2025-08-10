@@ -5,7 +5,7 @@
  * - generateInsights - A function that generates insights based on a user's visa-related question.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, geminiFlash} from '@/ai/genkit';
 import {
   InsightInput,
   InsightInputSchema,
@@ -19,6 +19,7 @@ export async function generateInsights(input: InsightInput): Promise<InsightOutp
 
 const prompt = ai.definePrompt({
   name: 'insightsGeneratorPrompt',
+  model: geminiFlash,
   input: {schema: InsightInputSchema},
   output: {schema: InsightOutputSchema},
   prompt: `You are an expert immigration analyst. Based on the user's question, your task is to generate a list of 3-5 highly relevant, actionable, and factual insights.
