@@ -144,7 +144,7 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
            )}
         </div>
       </ScrollArea>
-      <div className="p-4 border-t">
+      <div className="p-4 border-t mt-auto">
         <form onSubmit={handleSubmit} className="flex gap-4">
           <Input
             value={input}

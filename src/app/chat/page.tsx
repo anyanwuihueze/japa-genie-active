@@ -9,9 +9,10 @@ import Link from 'next/link';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
+
 function InsightsPlaceholder() {
     return (
-        <CardContent>
+        <CardContent className="p-4">
             <p className="text-muted-foreground">
                 As you chat, relevant insights and information will appear here. For example, if you ask about student visas for Canada, we might show you the top 5 universities, average tuition costs, and a link to the official application portal.
             </p>
@@ -31,7 +32,7 @@ function InsightsLoading() {
 function InsightsContent({ insights }: { insights: InsightOutput | null }) {
     if (!insights || insights.insights.length === 0) {
         return (
-             <CardContent className="flex flex-col items-center justify-center text-center text-muted-foreground space-y-4 h-64">
+             <CardContent className="flex flex-col items-center justify-center text-center text-muted-foreground space-y-4 h-64 p-4">
                 <AlertCircle className="w-8 h-8 text-amber-500" />
                 <p>No specific insights could be generated for that query. Try asking a more specific question about a country or visa type.</p>
             </CardContent>
@@ -113,16 +114,16 @@ export default function ChatPage() {
   const [insightsLoading, setInsightsLoading] = useState(false);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full overflow-hidden">
       <header className="p-4 border-b shrink-0">
         <h1 className="text-2xl font-bold tracking-tight">AI Chat Assistant</h1>
         <p className="text-sm text-muted-foreground">
           Ask me anything about the visa application process.
         </p>
       </header>
-      <div className="flex-1 grid md:grid-cols-3 overflow-hidden">
+      <div className="flex flex-1 md:grid md:grid-cols-3 overflow-hidden">
         {/* Chat Pane */}
-        <div className="md:col-span-2 h-full flex flex-col border-r">
+        <div className="md:col-span-2 h-full flex flex-col border-r overflow-y-auto">
           <ChatClient 
              insights={insights}
              onNewInsights={setInsights}
@@ -130,9 +131,9 @@ export default function ChatPage() {
           />
         </div>
         {/* Insights Pane */}
-        <div className="hidden md:flex flex-col h-full">
+        <div className="hidden md:flex flex-col h-full overflow-y-auto">
            <Card className="flex-1 flex flex-col h-full rounded-none border-0 border-l">
-             <CardHeader className="flex flex-row items-center gap-2 shrink-0">
+             <CardHeader className="flex flex-row items-center gap-2 shrink-0 p-4">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>
             </CardHeader>
