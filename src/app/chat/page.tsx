@@ -7,6 +7,7 @@ import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, R
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import Link from 'next/link';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 function InsightsPlaceholder() {
     return (
@@ -129,15 +130,15 @@ export default function ChatPage() {
           />
         </div>
         {/* Insights Pane */}
-        <div className="hidden md:flex flex-col h-full overflow-y-auto">
-           <Card className="flex-1 flex flex-col h-full">
+        <div className="hidden md:flex flex-col h-full">
+           <Card className="flex-1 flex flex-col h-full rounded-none border-0 border-l">
              <CardHeader className="flex flex-row items-center gap-2 shrink-0">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>
             </CardHeader>
-            <div className="flex-1 overflow-y-auto">
+            <ScrollArea className="flex-1">
               {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
-            </div>
+            </ScrollArea>
            </Card>
         </div>
       </div>
