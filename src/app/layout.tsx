@@ -30,9 +30,9 @@ export default function RootLayout({
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <div className="flex flex-col flex-1 h-full">
+              <div className="relative flex h-full w-full flex-col">
                   <AppHeader />
-                  <main className="flex-grow container py-8 flex-1 flex flex-col">{children}</main>
+                  <main className="flex-1 container py-8 flex flex-col">{children}</main>
                   <AppFooter />
               </div>
             </SidebarInset>
