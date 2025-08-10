@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import ChatClient from './client';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, Repeat } from 'lucide-react';
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import Link from 'next/link';
@@ -120,7 +120,7 @@ export default function ChatPage() {
           Ask me anything about the visa application process.
         </p>
       </header>
-      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4 overflow-hidden">
+      <div className="flex-1 grid md:grid-cols-3 overflow-hidden">
         <div className="md:col-span-2 h-full flex flex-col">
           <ChatClient 
              insights={insights}
