@@ -7,6 +7,7 @@ import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, R
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import Link from 'next/link';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 function InsightsPlaceholder() {
     return (
@@ -119,7 +120,7 @@ export default function ChatPage() {
           Ask me anything about the visa application process.
         </p>
       </header>
-      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4 overflow-hidden">
+      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4 overflow-y-hidden h-[calc(100vh_-_10rem)]">
         <div className="md:col-span-2 h-full flex flex-col">
           <ChatClient 
              insights={insights}
@@ -127,16 +128,18 @@ export default function ChatPage() {
              onInsightsLoading={setInsightsLoading}
           />
         </div>
-        <div className="hidden md:flex flex-col gap-8">
-          <Card className="flex-1 flex flex-col">
-            <CardHeader className="flex flex-row items-center gap-2">
-              <Sparkles className="w-5 h-5 text-primary" />
-              <CardTitle className="text-xl">Insights</CardTitle>
+        <div className="hidden md:flex flex-col">
+           <Card className="flex-1 flex flex-col">
+             <CardHeader className="flex flex-row items-center gap-2">
+                <Sparkles className="w-5 h-5 text-primary" />
+                <CardTitle className="text-xl">Insights</CardTitle>
             </CardHeader>
-            <div className="flex-1 overflow-y-auto">
-                {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
-            </div>
-          </Card>
+             <ScrollArea className="flex-1">
+                <div className="h-full">
+                    {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
+                </div>
+             </ScrollArea>
+           </Card>
         </div>
       </div>
     </div>

@@ -38,29 +38,23 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-  
+
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
     const currentInput = input;
     setInput('');
     setIsLoading(true);
     onInsightsLoading(true);
-  
-    // Add an empty assistant message to update
-    setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
-  
-    try {
-        const [chatResult] = await Promise.all([
-            visaChatAssistant({ question: currentInput }),
-            generateInsights({ question: currentInput }).then(onNewInsights)
-        ]);
-  
-        setMessages((prevMessages) => {
-            const newMessages = [...prevMessages];
-            newMessages[newMessages.length - 1].content = chatResult.answer;
-            return newMessages;
-        });
 
+    try {
+      const [chatResult, insightResult] = await Promise.all([
+        visaChatAssistant({ question: currentInput }),
+        generateInsights({ question: currentInput }),
+      ]);
+      
+      onNewInsights(insightResult);
+
+      setMessages((prev) => [...prev, { role: 'assistant', content: chatResult.answer }]);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred.';
       toast({
@@ -68,10 +62,14 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
         title: 'Chat Error',
         description: errorMessage,
       });
-      setMessages((prevMessages) => {
-        const newMessages = [...prevMessages];
-        const content = `Sorry, I encountered an error: ${errorMessage}`;
-        newMessages[newMessages.length - 1].content = content;
+      setMessages((prev) => {
+        const newMessages = [...prev];
+        const lastMessage = newMessages[newMessages.length - 1];
+        if (lastMessage.role === 'assistant') {
+          lastMessage.content = `Sorry, I encountered an error: ${errorMessage}`;
+        } else {
+           newMessages.push({ role: 'assistant', content: `Sorry, I encountered an error: ${errorMessage}` });
+        }
         return newMessages;
       });
     } finally {
@@ -79,7 +77,7 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
       onInsightsLoading(false);
     }
   };
-  
+
   useEffect(() => {
     if (scrollAreaRef.current) {
         scrollAreaRef.current.scrollTo({
@@ -92,8 +90,8 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
 
   return (
     <div className="flex flex-col flex-1 bg-card rounded-lg border h-full">
-      <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
-        <div className="space-y-6">
+      <ScrollArea className="flex-1" ref={scrollAreaRef}>
+        <div className="space-y-6 p-4">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -114,16 +112,9 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
                   'max-w-md p-3 rounded-xl',
                    message.role === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted',
-                   isLoading && index === messages.length -1 && 'flex items-center gap-2'
+                    : 'bg-muted'
                 )}
               >
-                 {isLoading && index === messages.length - 1 && !message.content && (
-                    <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span className="text-sm text-muted-foreground">Thinking...</span>
-                    </>
-                 )}
                 <p className="text-sm whitespace-pre-wrap">{message.content}</p>
               </div>
               {message.role === 'user' && (
@@ -135,6 +126,19 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
               )}
             </div>
           ))}
+           {isLoading && (
+             <div className="flex items-start gap-4 justify-start">
+                <Avatar className="w-8 h-8">
+                  <AvatarFallback className="bg-primary text-amber-400">
+                    <JapaGenieLogo className="w-5 h-5" />
+                  </AvatarFallback>
+                </Avatar>
+                <div className="bg-muted p-3 rounded-xl flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span className="text-sm text-muted-foreground">Thinking...</span>
+                </div>
+            </div>
+           )}
         </div>
       </ScrollArea>
       <div className="p-4 border-t">
