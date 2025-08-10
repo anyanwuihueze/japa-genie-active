@@ -32,7 +32,7 @@ export default function RootLayout({
             <SidebarInset>
               <div className="relative flex h-full w-full flex-col">
                   <AppHeader />
-                  <main className="flex-1 flex flex-col overflow-y-hidden">{children}</main>
+                  <main className="flex-1 flex flex-col">{children}</main>
                   <AppFooter />
               </div>
             </SidebarInset>
