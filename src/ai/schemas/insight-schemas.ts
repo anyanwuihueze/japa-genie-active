@@ -19,6 +19,22 @@ export const InsightOutputSchema = z.object({
         headline: z.string().describe("The key insight or topic header."),
         detail: z.string().describe("A detailed explanation or data point for the insight."),
         url: z.string().optional().describe("An optional, highly relevant URL for the user to learn more."),
-    })).describe("A list of 3-5 key insights related to the user's question.")
+    })).describe("A list of 3-5 key insights related to the user's question."),
+    costEstimates: z.array(z.object({
+        item: z.string().describe("The item or service being estimated."),
+        cost: z.number().describe("The estimated cost as a number."),
+        currency: z.string().describe("The currency of the cost (e.g., USD, CAD, EUR)."),
+    })).describe("A list of key cost estimates."),
+    visaAlternatives: z.array(z.object({
+        visaName: z.string().describe("The name of the alternative visa."),
+        description: z.string().describe("A brief description of the alternative visa."),
+    })).describe("A list of alternative visa options."),
+    chartData: z.object({
+        title: z.string().describe("A descriptive title for the chart."),
+        data: z.array(z.object({
+            name: z.string().describe("The name of the data point (e.g., a country, a city, a category)."),
+            value: z.number().describe("The numeric value of the data point."),
+        })).describe("An array of data points for a bar chart.")
+    }).describe("Data suitable for generating a simple bar chart.")
 });
 export type InsightOutput = z.infer<typeof InsightOutputSchema>;

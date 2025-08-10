@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import ChatClient from './client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, Sparkles, Link as LinkIcon, AlertCircle } from 'lucide-react';
-import type { InsightOutput } from '@/ai/flows/insights-generator';
+import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, Repeat } from 'lucide-react';
+import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import Link from 'next/link';
+import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 
 function InsightsPlaceholder() {
     return (
@@ -19,7 +20,7 @@ function InsightsPlaceholder() {
 
 function InsightsLoading() {
     return (
-        <CardContent className="flex flex-col items-center justify-center text-center text-muted-foreground space-y-4 h-64">
+        <CardContent className="flex flex-col items-center justify-center text-center text-muted-foreground space-y-4 h-full">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
             <p>Generating insights based on your question...</p>
         </CardContent>
@@ -36,8 +37,60 @@ function InsightsContent({ insights }: { insights: InsightOutput | null }) {
         );
     }
 
+    const { costEstimates, visaAlternatives, chartData } = insights;
+
     return (
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
+            {chartData && chartData.data.length > 0 && (
+                 <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                    <h3 className="font-bold text-foreground flex items-center gap-2 mb-2"> <BarChart className="w-5 h-5" /> {chartData.title}</h3>
+                    <div className="h-48 w-full">
+                         <ResponsiveContainer width="100%" height="100%">
+                            <RechartsBarChart data={chartData.data}>
+                                <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
+                                <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
+                                <Tooltip
+                                    contentStyle={{
+                                        backgroundColor: 'hsl(var(--background))',
+                                        borderColor: 'hsl(var(--border))',
+                                        borderRadius: 'var(--radius)',
+                                    }}
+                                />
+                                <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                            </RechartsBarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+            )}
+
+            {costEstimates && costEstimates.length > 0 && (
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                    <h3 className="font-bold text-foreground flex items-center gap-2 mb-2"> <FileText className="w-5 h-5" /> Cost Estimates</h3>
+                    <ul className="space-y-2">
+                        {costEstimates.map((item, index) => (
+                            <li key={index} className="flex justify-between items-center text-sm">
+                                <span className="text-muted-foreground">{item.item}</span>
+                                <span className="font-medium text-foreground">{new Intl.NumberFormat('en-US', { style: 'currency', currency: item.currency }).format(item.cost)}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {visaAlternatives && visaAlternatives.length > 0 && (
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                    <h3 className="font-bold text-foreground flex items-center gap-2 mb-2"> <Repeat className="w-5 h-5" /> Visa Alternatives</h3>
+                     <ul className="space-y-3">
+                        {visaAlternatives.map((item, index) => (
+                            <li key={index} className="text-sm">
+                                <p className="font-semibold text-foreground">{item.visaName}</p>
+                                <p className="text-muted-foreground">{item.description}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
             {insights.insights.map((item, index) => (
                 <div key={index} className="p-4 bg-primary/5 rounded-lg border border-primary/10">
                     <h3 className="font-bold text-foreground">{item.headline}</h3>
@@ -80,7 +133,9 @@ export default function ChatPage() {
               <Sparkles className="w-5 h-5 text-primary" />
               <CardTitle className="text-xl">Insights</CardTitle>
             </CardHeader>
-            {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
+            <div className="flex-1 overflow-y-auto">
+                {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
+            </div>
           </Card>
         </div>
       </div>
