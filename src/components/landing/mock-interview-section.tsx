@@ -1,9 +1,11 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle, Video, FileText, Calendar, Briefcase, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const interviewQuestions = [
   'Can you explain your study plans in detail?',
@@ -72,23 +74,27 @@ export function MockInterviewSection() {
                     ))}
                   </ul>
                   <div className="mt-auto">
-                     <Button size="lg" className="w-full bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow">
-                        Start Practice Interview <ArrowRight className="ml-2 w-5 h-5" />
+                     <Button asChild size="lg" className="w-full bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow">
+                        <Link href="/interview">
+                            Start Practice Interview <ArrowRight className="ml-2 w-5 h-5" />
+                        </Link>
                     </Button>
                   </div>
                 </CardContent>
               </Card>
               <div className="grid sm:grid-cols-2 gap-6">
                 {features.map((feature) => (
-                    <Card key={feature.title} className="text-center p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex justify-center mb-4">
-                            <div className="p-3 bg-primary/10 rounded-full text-primary">
-                                <feature.icon className="w-8 h-8"/>
+                    <Link href="/features" key={feature.title} className="block hover:shadow-lg transition-shadow rounded-lg">
+                        <Card className="text-center p-6 h-full">
+                            <div className="flex justify-center mb-4">
+                                <div className="p-3 bg-primary/10 rounded-full text-primary">
+                                    <feature.icon className="w-8 h-8"/>
+                                </div>
                             </div>
-                        </div>
-                        <h3 className="font-bold text-lg">{feature.title}</h3>
-                        <p className="text-sm text-muted-foreground">{feature.description}</p>
-                    </Card>
+                            <h3 className="font-bold text-lg">{feature.title}</h3>
+                            <p className="text-sm text-muted-foreground">{feature.description}</p>
+                        </Card>
+                    </Link>
                 ))}
               </div>
             </div>
