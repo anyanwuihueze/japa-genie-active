@@ -112,7 +112,7 @@ export default function ChatPage() {
   const [insightsLoading, setInsightsLoading] = useState(false);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full">
       <header className="p-4 border-b shrink-0">
         <h1 className="text-2xl font-bold tracking-tight">AI Chat Assistant</h1>
         <p className="text-sm text-muted-foreground">
@@ -121,7 +121,7 @@ export default function ChatPage() {
       </header>
       <div className="flex-1 grid md:grid-cols-3 overflow-hidden">
         {/* Chat Pane */}
-        <div className="md:col-span-2 h-full flex flex-col overflow-y-auto">
+        <div className="md:col-span-2 h-full flex flex-col">
           <ChatClient 
              insights={insights}
              onNewInsights={setInsights}
@@ -129,8 +129,8 @@ export default function ChatPage() {
           />
         </div>
         {/* Insights Pane */}
-        <div className="hidden md:flex flex-col h-full overflow-hidden">
-           <Card className="flex-1 flex flex-col h-full overflow-y-auto">
+        <div className="hidden md:flex flex-col h-full overflow-y-auto">
+           <Card className="flex-1 flex flex-col h-full">
              <CardHeader className="flex flex-row items-center gap-2 shrink-0">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>
