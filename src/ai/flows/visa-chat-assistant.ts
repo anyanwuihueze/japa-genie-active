@@ -28,9 +28,9 @@ const prompt = ai.definePrompt({
 
 export async function visaChatAssistant(input: VisaChatAssistantInput) {
   const {stream} = await generate({
-    prompt: prompt,
+    prompt,
     input: input,
-    model: ai.getModel('googleai/gemini-2.0-flash'),
+    model: 'googleai/gemini-2.0-flash',
     stream: true,
   });
 
