@@ -32,7 +32,7 @@ export default function RootLayout({
             <SidebarInset>
               <div className="flex flex-col flex-1 h-full">
                   <AppHeader />
-                  <main className="flex-grow container py-8">{children}</main>
+                  <main className="flex-grow container py-8 flex-1 flex flex-col">{children}</main>
                   <AppFooter />
               </div>
             </SidebarInset>
