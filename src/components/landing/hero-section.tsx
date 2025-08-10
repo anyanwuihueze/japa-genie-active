@@ -25,7 +25,7 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center flex flex-col items-center">
         <div className="mb-6">
           <div className="animate-glow rounded-full">
-            <JapaGenieLogo className="w-24 h-24" />
+            <JapaGenieLogo className="w-24 h-24 text-amber-400" />
           </div>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
