@@ -120,7 +120,7 @@ export default function ChatPage() {
           Ask me anything about the visa application process.
         </p>
       </header>
-      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4 overflow-y-hidden h-[calc(100vh_-_10rem)]">
+      <div className="flex-1 grid md:grid-cols-3 gap-8 p-4 h-[calc(100vh_-_10rem)]">
         <div className="md:col-span-2 h-full flex flex-col">
           <ChatClient 
              insights={insights}
@@ -129,7 +129,7 @@ export default function ChatPage() {
           />
         </div>
         <div className="hidden md:flex flex-col">
-           <Card className="flex-1 flex flex-col">
+           <Card className="flex-1 flex flex-col h-full">
              <CardHeader className="flex flex-row items-center gap-2">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>
