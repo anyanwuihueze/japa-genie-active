@@ -7,7 +7,6 @@ import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, R
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import Link from 'next/link';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 function InsightsPlaceholder() {
     return (
@@ -41,7 +40,7 @@ function InsightsContent({ insights }: { insights: InsightOutput | null }) {
     const { costEstimates, visaAlternatives, chartData } = insights;
 
     return (
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-4">
             {chartData && chartData.data.length > 0 && (
                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
                     <h3 className="font-bold text-foreground flex items-center gap-2 mb-2"> <BarChart className="w-5 h-5" /> {chartData.title}</h3>
@@ -113,8 +112,8 @@ export default function ChatPage() {
   const [insightsLoading, setInsightsLoading] = useState(false);
 
   return (
-    <div className="flex flex-col h-full">
-      <header className="p-4 border-b">
+    <div className="flex flex-col h-full overflow-hidden">
+      <header className="p-4 border-b shrink-0">
         <h1 className="text-2xl font-bold tracking-tight">AI Chat Assistant</h1>
         <p className="text-sm text-muted-foreground">
           Ask me anything about the visa application process.
@@ -132,12 +131,12 @@ export default function ChatPage() {
         {/* Insights Pane */}
         <div className="hidden md:flex flex-col h-full overflow-hidden">
            <Card className="flex-1 flex flex-col h-full overflow-y-auto">
-             <CardHeader className="flex flex-row items-center gap-2">
+             <CardHeader className="flex flex-row items-center gap-2 shrink-0">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>
             </CardHeader>
-            <div className="h-full">
-                {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
+            <div className="flex-1 overflow-y-auto">
+              {insightsLoading ? <InsightsLoading /> : (insights ? <InsightsContent insights={insights} /> : <InsightsPlaceholder />)}
             </div>
            </Card>
         </div>
