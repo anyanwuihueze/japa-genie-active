@@ -18,7 +18,7 @@ export const InsightOutputSchema = z.object({
     insights: z.array(z.object({
         headline: z.string().describe("The key insight or topic header."),
         detail: z.string().describe("A detailed explanation or data point for the insight."),
-        url: z.string().url().optional().describe("An optional, highly relevant URL for the user to learn more."),
+        url: z.string().optional().describe("An optional, highly relevant URL for the user to learn more."),
     })).describe("A list of 3-5 key insights related to the user's question.")
 });
 export type InsightOutput = z.infer<typeof InsightOutputSchema>;
