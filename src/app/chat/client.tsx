@@ -105,8 +105,8 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
             >
               {message.role === 'assistant' && (
                 <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-muted text-accent">
-                    <JapaGenieLogo className="w-5 h-5" />
+                  <AvatarFallback className="bg-muted">
+                    <JapaGenieLogo className="w-5 h-5 text-accent" />
                   </AvatarFallback>
                 </Avatar>
               )}
@@ -132,8 +132,8 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
            {isLoading && (
              <div className="flex items-start gap-4 justify-start">
                 <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-muted text-accent">
-                    <JapaGenieLogo className="w-5 h-5" />
+                  <AvatarFallback className="bg-muted">
+                    <JapaGenieLogo className="w-5 h-5 text-accent" />
                   </AvatarFallback>
                 </Avatar>
                 <div className="bg-muted p-3 rounded-xl flex items-center gap-2">
