@@ -51,16 +51,17 @@ export default function FeaturesPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="flex flex-col text-center items-center p-8 transition-all hover:shadow-xl hover:-translate-y-1">
-              <div className="mb-4 bg-primary/10 text-primary rounded-full p-3">
-                <feature.icon className="w-8 h-8" />
-              </div>
-              <CardHeader className="p-0">
-                <CardTitle className="text-xl mb-2">{feature.title}</CardTitle>
-
-                <CardDescription className="text-base">{feature.description}</CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/dashboard" key={index} className="block group">
+                <Card className="flex flex-col text-center items-center p-8 transition-all hover:shadow-xl hover:-translate-y-1 h-full">
+                  <div className="mb-4 bg-primary/10 text-primary rounded-full p-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <feature.icon className="w-8 h-8" />
+                  </div>
+                  <CardHeader className="p-0">
+                    <CardTitle className="text-xl mb-2">{feature.title}</CardTitle>
+                    <CardDescription className="text-base">{feature.description}</CardDescription>
+                  </CardHeader>
+                </Card>
+            </Link>
           ))}
         </div>
 
