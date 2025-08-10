@@ -12,7 +12,6 @@ import { JapaGenieLogo } from '@/components/icons';
 import { Loader2, Send, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import { readStreamableValue } from 'ai/rsc';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -51,22 +50,17 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
     setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
   
     try {
-        const [stream] = await Promise.all([
+        const [chatResult] = await Promise.all([
             visaChatAssistant({ question: currentInput }),
             generateInsights({ question: currentInput }).then(onNewInsights)
         ]);
   
-      let text = '';
-      for await (const delta of readStreamableValue(stream)) {
-        if (typeof delta === 'string') {
-          text += delta;
-          setMessages((prevMessages) => {
+        setMessages((prevMessages) => {
             const newMessages = [...prevMessages];
-            newMessages[newMessages.length - 1].content = text;
+            newMessages[newMessages.length - 1].content = chatResult.answer;
             return newMessages;
-          });
-        }
-      }
+        });
+
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred.';
       toast({
