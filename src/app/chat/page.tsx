@@ -122,7 +122,7 @@ export default function ChatPage() {
       </header>
       <div className="flex-1 grid md:grid-cols-3 overflow-hidden">
         {/* Chat Pane */}
-        <div className="md:col-span-2 h-full flex flex-col">
+        <div className="md:col-span-2 h-full flex flex-col border-r">
           <ChatClient 
              insights={insights}
              onNewInsights={setInsights}
