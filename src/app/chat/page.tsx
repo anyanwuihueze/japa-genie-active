@@ -121,9 +121,9 @@ export default function ChatPage() {
           Ask me anything about the visa application process.
         </p>
       </header>
-      <div className="flex flex-1 md:grid md:grid-cols-3 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         {/* Chat Pane */}
-        <div className="md:col-span-2 h-full flex flex-col border-r overflow-y-auto">
+        <div className="flex-1 flex flex-col overflow-y-auto border-r">
           <ChatClient 
              insights={insights}
              onNewInsights={setInsights}
@@ -131,8 +131,8 @@ export default function ChatPage() {
           />
         </div>
         {/* Insights Pane */}
-        <div className="hidden md:flex flex-col h-full overflow-y-auto">
-           <Card className="flex-1 flex flex-col h-full rounded-none border-0 border-l">
+        <div className="hidden md:flex flex-col w-[380px] lg:w-[420px] overflow-y-auto">
+           <Card className="flex-1 flex flex-col rounded-none border-0 border-l">
              <CardHeader className="flex flex-row items-center gap-2 shrink-0 p-4">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <CardTitle className="text-xl">Insights</CardTitle>

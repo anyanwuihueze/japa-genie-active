@@ -26,7 +26,7 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-body antialiased h-full flex flex-col bg-background text-foreground">
+      <body className="font-sans antialiased h-full flex flex-col bg-background text-foreground">
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
