@@ -1,13 +1,33 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
 
 export function HeroSection() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-gradient-to-br from-[#0f172a] via-[#4338ca] to-[#f59e0b] relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10 text-center">
+    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 relative overflow-hidden">
+      {isMounted && (
+        <>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover z-0"
+            src="/videos/Extreme_closeup_of_202506211607_orzt4.mp4"
+          />
+          <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-10" />
+        </>
+      )}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
           STOP Getting Scammed. START Getting Results.
         </h1>

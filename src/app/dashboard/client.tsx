@@ -27,6 +27,25 @@ const formSchema = z.object({
 
 type SortKey = 'visaType' | 'estimatedCost' | 'approvalChance' | 'processingTime';
 
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error(`Request timed out after ${ms}ms`));
+    }, ms);
+
+    promise.then(
+      (res) => {
+        clearTimeout(timeoutId);
+        resolve(res);
+      },
+      (err) => {
+        clearTimeout(timeoutId);
+        reject(err);
+      }
+    );
+  });
+}
+
 export default function DashboardClient() {
   const { toast } = useToast();
   const [insights, setInsights] = useState<VisaInsightsOutput | null>(null);
@@ -50,9 +69,11 @@ export default function DashboardClient() {
     setError(null);
     setInsights(null);
     try {
-      const result = await generateVisaInsights(values);
+      const result = await withTimeout(generateVisaInsights(values), 30000);
+      console.log('Received insights result:', result);
       setInsights(result);
     } catch (e) {
+      console.error("Failed to generate insights:", e);
       const errorMessage = e instanceof Error ? e.message : 'An unexpected error occurred.';
       setError(errorMessage);
       toast({

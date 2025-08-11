@@ -7,7 +7,7 @@
  * - VisaInsightsOutput - The return type for the generateVisaInsights function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, geminiFlash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const VisaInsightsInputSchema = z.object({
@@ -42,6 +42,7 @@ export async function generateVisaInsights(input: VisaInsightsInput): Promise<Vi
 
 const prompt = ai.definePrompt({
   name: 'visaInsightsPrompt',
+  model: geminiFlash,
   input: {schema: VisaInsightsInputSchema},
   output: {schema: VisaInsightsOutputSchema},
   prompt: `You are an expert AI visa consultant. Your task is to provide personalized visa insights based on the user's profile, intended destination, and budget.
@@ -69,6 +70,18 @@ const prompt = ai.definePrompt({
 
   Provide a realistic and helpful analysis to guide the user's visa application journey.
   `,
+  config: {
+    safetySettings: [
+      {
+        category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+        threshold: 'BLOCK_NONE',
+      },
+      {
+        category: 'HARM_CATEGORY_HARASSMENT',
+        threshold: 'BLOCK_NONE',
+      },
+    ],
+  },
 });
 
 const generateVisaInsightsFlow = ai.defineFlow(
@@ -79,6 +92,9 @@ const generateVisaInsightsFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('Failed to generate visa insights. The AI model did not return a valid response.');
+    }
+    return output;
   }
 );

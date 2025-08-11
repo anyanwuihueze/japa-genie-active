@@ -8,7 +8,7 @@
  * - VisaChatAssistantOutput - The return type for the visaChatAssistant function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, geminiFlash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const VisaChatAssistantInputSchema = z.object({
@@ -27,6 +27,7 @@ export async function visaChatAssistant(input: VisaChatAssistantInput): Promise<
 
 const prompt = ai.definePrompt({
   name: 'visaChatAssistantPrompt',
+  model: geminiFlash,
   input: {schema: VisaChatAssistantInputSchema},
   output: {schema: VisaChatAssistantOutputSchema},
   prompt: `You are a helpful AI assistant that answers questions about the visa application process.
@@ -43,6 +44,9 @@ const visaChatAssistantFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('The AI model did not return a valid response.');
+    }
+    return output;
   }
 );

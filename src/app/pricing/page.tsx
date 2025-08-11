@@ -53,7 +53,7 @@ export default function PricingPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-12">
       <header className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Find the Plan That's Right for You</h1>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Find the Plan That&apos;s Right for You</h1>
         <p className="text-lg md:text-xl text-muted-foreground">
           Simple, transparent pricing. No hidden fees.
         </p>
