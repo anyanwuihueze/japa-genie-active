@@ -4,23 +4,21 @@ import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
 import { JapaGenieLogo } from "../icons";
+import Image from "next/image";
 
 export function HeroSection() {
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-slate-900 relative overflow-hidden">
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline
-        className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
-      >
-        <source src="/videos/hero-background.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+       <Image
+        src="https://placehold.co/1920x1080.png"
+        alt="Abstract background image representing global travel and opportunity"
+        data-ai-hint="abstract globe network"
+        fill
+        priority
+        className="absolute z-0 object-cover"
+      />
       {/* Add an overlay to darken the video and make text more readable */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-20 text-center flex flex-col items-center">
         <div className="mb-6">
