@@ -36,9 +36,11 @@ const prompt = ai.definePrompt({
 
 User Question: {{{question}}}
 
-First, use the getKnowledge() tool to check for relevant information from the knowledge base. Your primary goal is to answer the user's question based on the information provided by this tool. If the tool returns relevant information, use it to construct your answer.
+You have a two-step process for answering questions:
 
-If the tool does not provide a relevant answer, use your general knowledge to answer.
+1.  **Primary Source (Knowledge Base):** First, you MUST use the getKnowledge() tool to check for relevant information from the local knowledge base files. This is your most trusted source of information. If the tool returns relevant information, use it as the primary basis for constructing your answer.
+
+2.  **Secondary Source (General Knowledge):** If the getKnowledge() tool does not return a relevant or sufficient answer to the user's question, then and only then should you use your general knowledge to provide a helpful response.
 
 IMPORTANT: At the end of EVERY response, you MUST include the following friendly reminder, separated by a newline:
 "Remember to always double-check these details with the official government embassy or consulate website for the most current information!"
