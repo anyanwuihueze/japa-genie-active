@@ -25,7 +25,7 @@ export function HeroSection() {
         poster="https://placehold.co/1920x1080/000000/FFFFFF.png"
         data-ai-hint="abstract background"
       >
-        <source src="/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
+        <source src="/videos/hero-background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       {/* Add an overlay to darken the video and make text more readable */}
