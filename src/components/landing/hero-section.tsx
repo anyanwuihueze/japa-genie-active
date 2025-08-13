@@ -6,6 +6,13 @@ import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
 import { JapaGenieLogo } from "../icons";
 import Image from "next/image";
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export function HeroSection() {
   return (
@@ -19,7 +26,7 @@ export function HeroSection() {
         poster="https://placehold.co/1920x1080/000000/FFFFFF.png"
         data-ai-hint="abstract background"
       >
-        <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
+        <source src="/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       {/* Add an overlay to darken the video and make text more readable */}
