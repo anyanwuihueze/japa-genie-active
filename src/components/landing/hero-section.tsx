@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -9,14 +10,19 @@ import Image from "next/image";
 export function HeroSection() {
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-slate-900 relative overflow-hidden">
-       <Image
-        src="https://placehold.co/1920x1080.png"
-        alt="Abstract background image representing global travel and opportunity"
-        data-ai-hint="abstract globe network"
-        fill
-        priority
-        className="absolute z-0 object-cover"
-      />
+       <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute z-0 w-full h-full object-cover"
+        poster="https://placehold.co/1920x1080.png"
+      >
+        {/* In a real project, you'd have different sources for different browsers */}
+        {/* For this placeholder, we'll use a generic one */}
+        <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       {/* Add an overlay to darken the video and make text more readable */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
       
