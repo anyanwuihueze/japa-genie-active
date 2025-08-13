@@ -9,17 +9,16 @@ import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 md:pt-24 bg-slate-900 relative overflow-hidden">
+    <section className="relative flex items-center justify-center pt-20 overflow-hidden md:pt-24 min-h-screen bg-slate-900">
        <video
         autoPlay
         loop
         muted
         playsInline
         className="absolute z-0 w-full h-full object-cover"
-        poster="https://placehold.co/1920x1080.png"
+        poster="https://placehold.co/1920x1080/000000/FFFFFF.png"
+        data-ai-hint="abstract background"
       >
-        {/* In a real project, you'd have different sources for different browsers */}
-        {/* For this placeholder, we'll use a generic one */}
         <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
