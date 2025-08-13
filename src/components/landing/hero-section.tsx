@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
 import { JapaGenieLogo } from "../icons";
-import Image from "next/image";
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
