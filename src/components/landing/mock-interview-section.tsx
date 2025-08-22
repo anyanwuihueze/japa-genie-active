@@ -53,7 +53,7 @@ export function MockInterviewSection() {
 
         <Tabs defaultValue="student" className="w-full">
           <div className="flex justify-center">
-            <TabsList className="grid grid-cols-4 h-auto w-full max-w-xl">
+            <TabsList className="grid w-full max-w-md grid-cols-2 sm:grid-cols-4 h-auto">
               <TabsTrigger value="student">Student</TabsTrigger>
               <TabsTrigger value="work">Work</TabsTrigger>
               <TabsTrigger value="business">Business</TabsTrigger>
