@@ -52,12 +52,14 @@ export function MockInterviewSection() {
         </header>
 
         <Tabs defaultValue="student" className="w-full">
-          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-2 md:grid-cols-4 h-auto">
-            <TabsTrigger value="student">Student Visas</TabsTrigger>
-            <TabsTrigger value="work">Work Permits</TabsTrigger>
-            <TabsTrigger value="business">Business Visas</TabsTrigger>
-            <TabsTrigger value="family">Family Reunification</TabsTrigger>
-          </TabsList>
+          <div className="flex justify-center">
+            <TabsList className="grid grid-cols-4 h-auto w-full max-w-xl">
+              <TabsTrigger value="student">Student</TabsTrigger>
+              <TabsTrigger value="work">Work</TabsTrigger>
+              <TabsTrigger value="business">Business</TabsTrigger>
+              <TabsTrigger value="family">Family</TabsTrigger>
+            </TabsList>
+          </div>
           <TabsContent value="student" className="mt-10">
             <div className="grid lg:grid-cols-2 gap-8 items-start">
               <Card className="bg-primary/5 h-full flex flex-col">
