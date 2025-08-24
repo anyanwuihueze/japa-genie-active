@@ -11,11 +11,11 @@ export function HeroSection() {
       {/* Background Gradient */}
       <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 
-      <div className="relative z-10 container mx-auto flex min-h-screen items-center px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 container mx-auto flex min-h-screen items-center px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Column: Text Content */}
           <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight md:leading-snug mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight md:leading-snug lg:leading-tight mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
               STOP Getting Scammed by Fake Visa Agents. START Getting Real Results.
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto md:mx-0 mb-8 leading-relaxed">
