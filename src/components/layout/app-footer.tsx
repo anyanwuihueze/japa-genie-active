@@ -5,7 +5,7 @@ import { JapaGenieLogo } from '@/components/icons';
 
 export function AppFooter() {
   return (
-    <footer className="bg-card border-t border-border/50 mt-auto py-4 px-4 text-center text-xs text-muted-foreground">
+    <footer className="bg-card border-t border-border/50 py-4 px-4 text-center text-xs text-muted-foreground">
       <div className="flex flex-col items-center justify-center space-y-2">
         <div className="flex items-center space-x-2">
           <Link href="/" className="flex items-center group">
