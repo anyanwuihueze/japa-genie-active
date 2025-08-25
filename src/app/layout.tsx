@@ -25,11 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="font-sans antialiased h-full flex flex-col bg-background text-foreground overflow-x-hidden">
+      <body className="font-sans antialiased h-full flex flex-col bg-background text-foreground overflow-x-hidden m-0 p-0">
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset className="flex flex-col min-h-0 flex-1">
-            <div className="flex flex-col h-full min-h-0">
+          <SidebarInset className="flex flex-col flex-1 min-h-0">
+            <div className="flex flex-col min-h-[100dvh]">
               <AppHeader />
               <main className="flex-1 overflow-y-auto">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
