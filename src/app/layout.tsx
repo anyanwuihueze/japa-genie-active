@@ -6,6 +6,7 @@ import { AppFooter } from '@/components/layout/app-footer';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { Inter } from 'next/font/google';
+import { FloatingChatButton } from '@/components/layout/floating-chat-button';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({
           </SidebarInset>
         </SidebarProvider>
         <Toaster />
+        <FloatingChatButton />
       </body>
     </html>
   );
