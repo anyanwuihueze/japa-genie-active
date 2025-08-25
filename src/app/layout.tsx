@@ -29,7 +29,7 @@ export default function RootLayout({
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <div className="relative flex h-full w-full flex-col">
+              <div className="relative flex h-full w-full flex-col min-h-0">
                   <AppHeader />
                   <main className="flex-1 flex flex-col overflow-y-auto">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
