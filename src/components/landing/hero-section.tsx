@@ -16,17 +16,17 @@ import Autoplay from "embla-carousel-autoplay"
 
 const presentationSlides = [
   {
-    src: "https://placehold.co/1920x1080/4285F4/FFFFFF.png",
+    src: "/images/slide1.png",
     alt: "Slide 1: Personalized visa recommendations",
     hint: "visa recommendations"
   },
   {
-    src: "https://placehold.co/1920x1080/FFC107/FFFFFF.png",
+    src: "/images/slide2.png",
     alt: "Slide 2: Interactive progress map to track your application",
     hint: "progress map"
   },
   {
-    src: "https://placehold.co/1920x1080/E8F0FE/000000.png",
+    src: "/images/slide3.png",
     alt: "Slide 3: AI-powered document checker to prevent errors",
     hint: "document check"
   }
