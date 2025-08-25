@@ -88,8 +88,8 @@ const subscriptionTiers = [
 
 export default function PricingPage() {
   return (
-    <div className="max-w-7xl mx-auto space-y-12">
-      <header className="text-center space-y-4">
+    <div className="container py-12 md:py-20">
+      <header className="text-center space-y-4 mb-12">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Find the Plan That's Right for You</h1>
         <p className="text-lg md:text-xl text-muted-foreground">
           Start with 3 free wishes. No credit card required.
@@ -105,7 +105,7 @@ export default function PricingPage() {
         </div>
         
         <TabsContent value="subscriptions" className="mt-10">
-            <div className="grid lg:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-3xl mx-auto">
                  {subscriptionTiers.map((tier) => (
                     <Card
                         key={tier.name}
@@ -145,7 +145,7 @@ export default function PricingPage() {
         </TabsContent>
 
         <TabsContent value="credits" className="mt-10">
-             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {oneTimeCredits.map((plan) => (
                 <Card key={plan.name} className="flex flex-col">
                     <CardHeader>
