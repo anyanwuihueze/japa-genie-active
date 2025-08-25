@@ -15,7 +15,7 @@ const FeaturesPage = dynamic(() => import('./features/page'), {
 // Main landing page for the application
 export default function Home() {
   return (
-    <div className="-m-8">
+    <div className="-mx-4 sm:-mx-6 lg:-mx-8 -mt-6 md:-mt-8">
       <HeroSection />
       <MockInterviewSection />
       <TestimonialsSection />

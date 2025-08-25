@@ -5,26 +5,19 @@ import { JapaGenieLogo } from '@/components/icons';
 
 export function AppFooter() {
   return (
-    <footer className="bg-card border-t border-border/50 mt-auto">
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-3 md:space-y-0">
-          <div className="flex items-center space-x-2">
-            <Link href="/" className="flex items-center group">
-              <JapaGenieLogo className="w-6 h-6 text-accent group-hover:scale-105 transition-transform" />
-              <span className="text-sm font-semibold text-primary group-hover:text-primary/90 transition-colors ml-1.5">
-                Japa Genie
-              </span>
-            </Link>
-            <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()} All rights reserved.
-            </p>
-          </div>
-          
-          <nav className="flex space-x-4">
-            <Link href="/privacy-policy" className="text-xs text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="/terms-of-service" className="text-xs text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link>
-            <Link href="/contact-us" className="text-xs text-muted-foreground hover:text-primary transition-colors">Contact Us</Link>
-          </nav>
+    <footer className="bg-card border-t border-border/50 mt-auto py-4 px-4 text-center text-xs md:text-sm text-muted-foreground">
+      <div className="flex flex-col items-center justify-center space-y-2">
+        <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center group">
+            <JapaGenieLogo className="w-5 h-5 text-accent group-hover:scale-105 transition-transform" />
+            <span className="font-semibold text-primary/90">Japa Genie</span>
+          </Link>
+        </div>
+        <p className="text-xs">&copy; {new Date().getFullYear()} All rights reserved.</p>
+        <div className="flex flex-wrap justify-center gap-3 text-xs">
+          <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
+          <Link href="/terms-of-service" className="hover:underline">Terms</Link>
+          <Link href="/contact-us" className="hover:underline">Contact</Link>
         </div>
       </div>
     </footer>
