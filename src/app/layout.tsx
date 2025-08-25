@@ -3,7 +3,7 @@ import './globals.css'; // Styles from globals.css will apply
 import { Toaster } from "@/components/ui/toaster";
 import { AppHeader } from '@/components/layout/app-header';
 import { AppFooter } from '@/components/layout/app-footer';
-import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { Inter } from 'next/font/google';
 
@@ -28,16 +28,14 @@ export default function RootLayout({
       <body className="font-sans antialiased h-full flex flex-col bg-background text-foreground overflow-x-hidden">
         <SidebarProvider>
             <AppSidebar />
-            <SidebarInset>
-              <div className="relative flex h-full w-full flex-col min-h-0">
-                  <AppHeader />
-                  <main className="flex-1 flex flex-col overflow-y-auto">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
-                      {children}
-                    </div>
-                  </main>
-                  <AppFooter />
-              </div>
+            <SidebarInset className="flex flex-col flex-1 min-h-0">
+              <AppHeader />
+              <main className="flex-1 overflow-y-auto">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+                  {children}
+                </div>
+              </main>
+              <AppFooter />
             </SidebarInset>
         </SidebarProvider>
         <Toaster />
