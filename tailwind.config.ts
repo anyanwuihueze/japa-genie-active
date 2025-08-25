@@ -110,11 +110,11 @@ export default {
         'glow': {
           '0%, 100%': { 
             transform: 'scale(1)',
-            boxShadow: '0 0 5px hsl(var(--accent)), 0 0 10px hsl(var(--accent))' 
+            boxShadow: '0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary))' 
           },
           '50%': { 
             transform: 'scale(1.05)',
-            boxShadow: '0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--accent))' 
+            boxShadow: '0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary))' 
           },
         },
         'shimmer': {
