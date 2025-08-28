@@ -54,23 +54,19 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
       
       onNewInsights(insightResult);
 
-      setMessages((prev) => [...prev, { role: 'assistant', content: chatResult.answer }]);
+      if (chatResult.answer) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: chatResult.answer }]);
+      } else {
+         throw new Error("The AI assistant did not provide an answer.");
+      }
+
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'An error occurred.';
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+      setMessages((prev) => [...prev, { role: 'assistant', content: `Sorry, I ran into a problem: ${errorMessage}` }]);
       toast({
         variant: 'destructive',
         title: 'Chat Error',
         description: errorMessage,
-      });
-      setMessages((prev) => {
-        const newMessages = [...prev];
-        const lastMessage = newMessages[newMessages.length - 1];
-        if (lastMessage.role === 'assistant') {
-          lastMessage.content = `Sorry, I encountered an error: ${errorMessage}`;
-        } else {
-           newMessages.push({ role: 'assistant', content: `Sorry, I encountered an error: ${errorMessage}` });
-        }
-        return newMessages;
       });
     } finally {
       setIsLoading(false);

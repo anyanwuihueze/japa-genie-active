@@ -1,37 +1,82 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { JapaGenieLogo } from '@/components/icons';
-import { Send, User, X } from 'lucide-react';
+import { Loader2, Send, User } from 'lucide-react';
 import { SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
+import { useToast } from '@/hooks/use-toast';
+
+interface Message {
+    role: 'user' | 'assistant';
+    content: string;
+}
 
 export function ChatPanel() {
-  const [messages, setMessages] = useState([
+  const { toast } = useToast();
+  const [messages, setMessages] = useState<Message[]>([
     {
         role: 'assistant',
-        content: "Hi there! I'm Japa Genie, your AI assistant. How can I help you today?"
+        content: "Hi there! I'm Japa Genie, your AI assistant. How can I help you with your visa journey?"
     }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    // TODO: Connect to Genkit flow
-    console.log('User message:', input);
+    
+    const userMessage: Message = { role: 'user', content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    const currentInput = input;
     setInput('');
+    setIsLoading(true);
+
+    try {
+      const result = await visaChatAssistant({ question: currentInput });
+      if (result.answer) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: result.answer }]);
+      } else {
+        throw new Error("The assistant didn't provide a response.");
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred.';
+      setMessages((prev) => [...prev, { role: 'assistant', content: `Sorry, I ran into an issue: ${errorMessage}` }]);
+      toast({
+        variant: 'destructive',
+        title: 'Chat Error',
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+        if (viewport) {
+            viewport.scrollTo({
+                top: viewport.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    }
+  }, [messages]);
+
 
   return (
     <div className="flex flex-col h-full bg-card bg-world-map">
@@ -44,7 +89,7 @@ export function ChatPanel() {
           Ask questions about our services, pricing, or features.
         </SheetDescription>
       </SheetHeader>
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1" ref={scrollAreaRef}>
         <div className="space-y-6 p-4">
           {messages.map((message, index) => (
              <div
@@ -63,7 +108,7 @@ export function ChatPanel() {
               )}
               <div
                 className={cn(
-                  'max-w-md p-3 rounded-xl',
+                  'max-w-xs md:max-w-md p-3 rounded-xl',
                    message.role === 'user'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-muted'
@@ -80,6 +125,19 @@ export function ChatPanel() {
               )}
             </div>
           ))}
+           {isLoading && (
+             <div className="flex items-start gap-4 justify-start">
+                <Avatar className="w-8 h-8">
+                  <AvatarFallback className="bg-muted">
+                    <JapaGenieLogo className="w-5 h-5 text-accent" />
+                  </AvatarFallback>
+                </Avatar>
+                <div className="bg-muted p-3 rounded-xl flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span className="text-sm text-muted-foreground">Thinking...</span>
+                </div>
+            </div>
+           )}
         </div>
       </ScrollArea>
       <div className="p-4 border-t mt-auto bg-card">
