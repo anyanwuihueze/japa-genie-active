@@ -6,11 +6,17 @@ import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
 
 export function HeroSection() {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-slate-900 text-slate-50">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-          <div className="flex flex-col justify-center space-y-6">
+          <div className={`flex flex-col justify-center space-y-6 transition-all duration-1000 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter bg-gradient-to-r from-amber-400 to-primary bg-clip-text text-transparent">
                 STOP Getting Scammed by Visa Agents. START Getting Real Results.
@@ -22,7 +28,7 @@ export function HeroSection() {
             <div className="flex flex-col gap-4 min-[400px]:flex-row">
               <Button
                 size="lg"
-                className="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-8 py-6 text-lg font-bold"
+                className="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-8 py-6 text-lg font-bold animate-glow"
                 asChild
               >
                 <Link href="/dashboard" className="flex items-center gap-2">
