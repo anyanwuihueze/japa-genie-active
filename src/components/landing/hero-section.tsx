@@ -50,7 +50,7 @@ export function HeroSection() {
              <div className="w-full max-w-lg mx-auto p-2 rounded-xl shadow-2xl bg-slate-800/70 backdrop-blur-sm border border-slate-700">
                 <div className="aspect-video overflow-hidden rounded-lg">
                     <video
-                        src="/images/slide1.png"
+                        src="/videos/hero-background.mp4"
                         autoPlay
                         loop
                         muted
