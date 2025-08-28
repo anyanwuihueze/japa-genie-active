@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -8,21 +7,19 @@ import { Sparkles, ArrowRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative w-full bg-slate-900 text-white">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-
-      <div className="relative z-10 container mx-auto flex min-h-screen items-center px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Column: Text Content */}
-          <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight md:leading-snug lg:leading-tight mb-6 bg-gradient-to-r from-white via-amber-300 to-red-400 bg-clip-text text-transparent">
-              STOP Getting Scammed by Fake Visa Agents. START Getting Real Results.
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto md:mx-0 mb-8 leading-relaxed">
-              Japa Genie is your AI-powered guide for navigating the complex world of visas. Get personalized recommendations and a clear roadmap to your destination.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+    <section className="w-full py-12 md:py-24 lg:py-32">
+      <div className="container px-4 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+          <div className="flex flex-col justify-center space-y-6">
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tighter bg-gradient-to-r from-amber-400 to-primary bg-clip-text text-transparent">
+                STOP Getting Scammed by Visa Agents. START Getting Real Results.
+              </h1>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                Japa Genie is your AI-powered guide for navigating the complex world of visas. Get personalized recommendations and a clear roadmap to your destination.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 min-[400px]:flex-row">
               <Button
                 size="lg"
                 className="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-8 py-6 text-lg font-bold"
@@ -34,8 +31,9 @@ export function HeroSection() {
                 </Link>
               </Button>
               <Button
-                variant="link"
-                className="text-white hover:text-amber-400 text-lg group flex items-center gap-1"
+                variant="outline"
+                size="lg"
+                className="text-muted-foreground group flex items-center gap-1"
                 asChild
               >
                 <Link href="/how-it-works">
@@ -45,21 +43,17 @@ export function HeroSection() {
               </Button>
             </div>
           </div>
-
-          {/* Right Column: Explainer Video */}
           <div className="flex items-center justify-center">
-             <div className="w-full max-w-lg mx-auto p-2 rounded-xl shadow-2xl bg-slate-800/70 backdrop-blur-sm border border-slate-700">
-                <div className="aspect-video overflow-hidden rounded-lg">
-                    <video
-                        src="/videos/hero-background.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-             </div>
+            <video 
+              src="/videos/Welcome-to-Japa-Genie.mp4" 
+              controls 
+              loop
+              className="rounded-lg shadow-2xl"
+              width="550"
+              height="310"
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
