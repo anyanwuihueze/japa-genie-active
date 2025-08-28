@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { JapaGenieLogo } from '@/components/icons';
-import { Send, User, Bot, X } from 'lucide-react';
-import { SheetHeader, SheetTitle, SheetDescription, SheetClose } from '@/components/ui/sheet';
+import { Send, User, X } from 'lucide-react';
+import { SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 export function ChatPanel() {
@@ -34,11 +34,11 @@ export function ChatPanel() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-card">
+    <div className="flex flex-col h-full bg-card bg-genie-pattern">
       <SheetHeader className="p-4 border-b">
         <SheetTitle className="flex items-center gap-2">
-            <Bot className="w-6 h-6 text-primary"/>
-            AI Chat Assistant
+            <JapaGenieLogo className="w-6 h-6 text-accent"/>
+            Japa Genie Assistant
         </SheetTitle>
         <SheetDescription>
           Ask questions about our services, pricing, or features.

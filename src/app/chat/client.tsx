@@ -92,7 +92,7 @@ export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatCli
 
 
   return (
-    <div className="flex flex-col flex-1 bg-card h-full">
+    <div className="flex flex-col flex-1 bg-card h-full bg-genie-pattern">
       <ScrollArea className="flex-1 h-full" ref={scrollAreaRef}>
         <div className="space-y-6 p-4">
           {messages.map((message, index) => (

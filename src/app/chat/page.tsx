@@ -8,6 +8,7 @@ import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 import Link from 'next/link';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { JapaGenieLogo } from '@/components/icons';
 
 
 function InsightsPlaceholder() {
@@ -115,11 +116,14 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <header className="p-4 border-b shrink-0">
-        <h1 className="text-2xl font-bold tracking-tight">AI Chat Assistant</h1>
-        <p className="text-sm text-muted-foreground">
-          Ask me anything about the visa application process.
-        </p>
+      <header className="p-4 border-b shrink-0 flex items-center gap-3">
+        <JapaGenieLogo className="w-8 h-8 text-accent" />
+        <div>
+            <h1 className="text-2xl font-bold tracking-tight">Japa Genie Assistant</h1>
+            <p className="text-sm text-muted-foreground">
+            Ask me anything about the visa application process.
+            </p>
+        </div>
       </header>
       <div className="flex flex-1 overflow-hidden">
         {/* Chat Pane */}
