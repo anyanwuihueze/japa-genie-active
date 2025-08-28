@@ -7,7 +7,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-slate-900 text-slate-50">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div className="flex flex-col justify-center space-y-6">
@@ -15,7 +15,7 @@ export function HeroSection() {
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter bg-gradient-to-r from-amber-400 to-primary bg-clip-text text-transparent">
                 STOP Getting Scammed by Visa Agents. START Getting Real Results.
               </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+              <p className="max-w-[600px] text-slate-300 md:text-xl">
                 Japa Genie is your AI-powered guide for navigating the complex world of visas. Get personalized recommendations and a clear roadmap to your destination.
               </p>
             </div>
@@ -33,7 +33,7 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="text-muted-foreground group flex items-center gap-1"
+                className="text-slate-300 border-slate-700 hover:bg-slate-800 hover:text-slate-50 group flex items-center gap-1"
                 asChild
               >
                 <Link href="/how-it-works">
@@ -46,8 +46,10 @@ export function HeroSection() {
           <div className="flex items-center justify-center">
             <video 
               src="/videos/Welcome-to-Japa-Genie.mp4" 
-              controls 
+              autoPlay
               loop
+              muted
+              playsInline
               className="rounded-lg shadow-2xl"
               width="550"
               height="310"
