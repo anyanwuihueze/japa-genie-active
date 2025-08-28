@@ -50,18 +50,20 @@ export function HeroSection() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <video 
-              src="/videos/Welcome-to-Japa-Genie.mp4" 
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="rounded-lg shadow-2xl"
-              width="550"
-              height="310"
-            >
-              Your browser does not support the video tag.
-            </video>
+            <div className="overflow-hidden rounded-lg shadow-xl shadow-inner border border-slate-700">
+              <video 
+                src="/videos/Welcome-to-Japa-Genie.mp4" 
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="rounded-lg"
+                width="550"
+                height="310"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         </div>
       </div>
