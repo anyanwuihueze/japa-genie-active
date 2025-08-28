@@ -34,7 +34,7 @@ export function ChatPanel() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-card bg-genie-pattern">
+    <div className="flex flex-col h-full bg-card bg-world-map">
       <SheetHeader className="p-4 border-b">
         <SheetTitle className="flex items-center gap-2">
             <JapaGenieLogo className="w-6 h-6 text-accent"/>
