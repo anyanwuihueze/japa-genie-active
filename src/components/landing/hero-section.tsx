@@ -1,42 +1,11 @@
-
 'use client';
 
 import * as React from 'react';
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import { Sparkles, ArrowRight } from "lucide-react";
-import Image from 'next/image';
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel"
-import Autoplay from "embla-carousel-autoplay"
-
-const presentationSlides = [
-  {
-    src: "https://picsum.photos/1280/720",
-    alt: "Slide 1: Personalized visa recommendations",
-    hint: "visa recommendations"
-  },
-  {
-    src: "https://picsum.photos/1280/720",
-    alt: "Slide 2: Interactive progress map to track your application",
-    hint: "progress map"
-  },
-  {
-    src: "https://picsum.photos/1280/720",
-    alt: "Slide 3: AI-powered document checker to prevent errors",
-    hint: "document check"
-  }
-];
 
 export function HeroSection() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  )
-
   return (
     <section className="relative w-full bg-slate-900 text-white">
       {/* Background Gradient */}
@@ -76,34 +45,19 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Explainer Presentation */}
+          {/* Right Column: Explainer Video */}
           <div className="flex items-center justify-center">
              <div className="w-full max-w-lg mx-auto p-2 rounded-xl shadow-2xl bg-slate-800/70 backdrop-blur-sm border border-slate-700">
-                <Carousel
-                  plugins={[plugin.current]}
-                  className="w-full"
-                  onMouseEnter={plugin.current.stop}
-                  onMouseLeave={plugin.current.reset}
-                >
-                  <CarouselContent>
-                    {presentationSlides.map((slide, index) => (
-                      <CarouselItem key={index}>
-                        <Card className="border-0 bg-transparent">
-                          <CardContent className="flex aspect-video items-center justify-center p-0 rounded-lg overflow-hidden">
-                             <Image 
-                                src={slide.src} 
-                                alt={slide.alt}
-                                width={1280}
-                                height={720}
-                                className="w-full h-full object-cover"
-                                data-ai-hint={slide.hint}
-                            />
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                </Carousel>
+                <div className="aspect-video overflow-hidden rounded-lg">
+                    <video
+                        src="/images/slide1.png"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                    />
+                </div>
              </div>
           </div>
         </div>
