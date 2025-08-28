@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { MessageSquare } from 'lucide-react';
+import { JapaGenieLogo } from '@/components/icons';
 
 export function FloatingChatButton() {
   return (
@@ -10,7 +10,7 @@ export function FloatingChatButton() {
         size="lg"
         className="h-14 rounded-full bg-primary text-primary-foreground shadow-lg animate-glow transition-transform hover:scale-105"
       >
-        <MessageSquare className="w-6 h-6 mr-2" />
+        <JapaGenieLogo className="w-6 h-6 mr-2 text-black" />
         <span className="font-semibold whitespace-nowrap">Chat with Us</span>
       </Button>
     </div>
