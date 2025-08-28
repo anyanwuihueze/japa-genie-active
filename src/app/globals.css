@@ -112,3 +112,10 @@
     backdrop-filter: blur(12px);
   }
 }
+
+.chat-wallpaper {
+  background-image: url('/wallpaper.png'); /* put your wallpaper in /public/wallpaper.png */
+  background-size: cover; /* makes it cover the entire div */
+  background-repeat: no-repeat;
+  background-position: center;
+}
