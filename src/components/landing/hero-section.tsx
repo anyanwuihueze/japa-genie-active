@@ -50,7 +50,7 @@ export function HeroSection() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div className="overflow-hidden rounded-lg shadow-xl shadow-inner border border-slate-700">
+            <div className="overflow-hidden rounded-lg shadow-xl ring-1 ring-primary/50 ring-offset-8 ring-offset-slate-900">
               <video 
                 src="/videos/Welcome-to-Japa-Genie.mp4" 
                 autoPlay
