@@ -1,5 +1,8 @@
+
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { CheckCircle, FileText, Send, Clock, Plane } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 
 const progressSteps = [
   {
@@ -45,7 +48,22 @@ const iconStyles = {
     pending: 'text-muted-foreground'
 }
 
+const statusBadges = {
+    completed: 'Completed',
+    active: 'In Progress',
+    pending: 'Not Started'
+}
+
+const statusBadgeVariants = {
+    completed: 'default',
+    active: 'secondary',
+    pending: 'outline'
+}
+
 export default function ProgressPage() {
+  const completedSteps = progressSteps.filter(step => step.status === 'completed').length;
+  const progressPercentage = (completedSteps / progressSteps.length) * 100;
+
   return (
     <div className="space-y-8">
       <header className="space-y-2">
@@ -54,6 +72,17 @@ export default function ProgressPage() {
           Follow these steps to navigate your visa application process successfully.
         </p>
       </header>
+
+      <Card>
+        <CardHeader>
+          <div className="flex justify-between items-center mb-2">
+            <CardTitle className="text-xl">Your Progress</CardTitle>
+            <p className="text-lg font-bold text-primary">{Math.round(progressPercentage)}% Complete</p>
+          </div>
+          <Progress value={progressPercentage} className="w-full" />
+        </CardHeader>
+      </Card>
+
 
       <div className="relative space-y-8">
         <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-border -z-10 md:left-8"></div>
@@ -64,7 +93,12 @@ export default function ProgressPage() {
             </div>
             <Card className={`flex-1 ${statusStyles[step.status as keyof typeof statusStyles]}`}>
               <CardHeader>
-                <CardTitle>{step.title}</CardTitle>
+                <div className="flex flex-col sm:flex-row justify-between sm:items-center">
+                    <CardTitle>{step.title}</CardTitle>
+                    <Badge variant={statusBadgeVariants[step.status as keyof typeof statusBadgeVariants] as "default" | "secondary" | "outline"} className="mt-2 sm:mt-0 max-w-fit">
+                        {statusBadges[step.status as keyof typeof statusBadges]}
+                    </Badge>
+                </div>
                 <CardDescription className="pt-2">{step.description}</CardDescription>
               </CardHeader>
             </Card>

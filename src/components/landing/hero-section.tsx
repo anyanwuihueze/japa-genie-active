@@ -16,17 +16,17 @@ import Autoplay from "embla-carousel-autoplay"
 
 const presentationSlides = [
   {
-    src: "/images/slide1.png",
+    src: "https://picsum.photos/1280/720",
     alt: "Slide 1: Personalized visa recommendations",
     hint: "visa recommendations"
   },
   {
-    src: "/images/slide2.png",
+    src: "https://picsum.photos/1280/720",
     alt: "Slide 2: Interactive progress map to track your application",
     hint: "progress map"
   },
   {
-    src: "/images/slide3.png",
+    src: "https://picsum.photos/1280/720",
     alt: "Slide 3: AI-powered document checker to prevent errors",
     hint: "document check"
   }
@@ -93,8 +93,8 @@ export function HeroSection() {
                              <Image 
                                 src={slide.src} 
                                 alt={slide.alt}
-                                width={1920}
-                                height={1080}
+                                width={1280}
+                                height={720}
                                 className="w-full h-full object-cover"
                                 data-ai-hint={slide.hint}
                             />
