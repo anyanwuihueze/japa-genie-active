@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -74,11 +75,9 @@
   * {
     @apply border-border;
   }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
     @apply font-sans bg-background text-foreground;
     margin: 0;
@@ -87,16 +86,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-foreground;
   }
-
   section {
     @apply py-16;
   }
@@ -106,7 +98,6 @@
   .container {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-
   .glass-effect {
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
