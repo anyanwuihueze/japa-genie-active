@@ -1,12 +1,12 @@
-'use client' // MUST be at the very top
+'use client' // must be first line
 
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import ChatLayout from './ChatLayout'
-import React from 'react'
-import { AppSidebar } from '@/components/app-sidebar'
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 import { AppHeader } from './app-header'
 import { AppFooter } from './app-footer'
+import { AppSidebar } from '@/components/app-sidebar' // corrected import
 
 // Layout for all non-chat pages
 function MainLayout({ children }: { children: React.ReactNode }) {
