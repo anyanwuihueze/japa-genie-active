@@ -10,7 +10,7 @@ import { JapaGenieLogo } from '@/components/icons';
 import { Loader2, Send, User } from 'lucide-react';
 import { SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
+import { siteAssistant } from '@/ai/flows/site-assistant-flow';
 import { useToast } from '@/hooks/use-toast';
 
 interface Message {
@@ -23,7 +23,7 @@ export function ChatPanel() {
   const [messages, setMessages] = useState<Message[]>([
     {
         role: 'assistant',
-        content: "Hi there! I'm Japa Genie, your AI assistant. How can I help you with your visa journey?"
+        content: "Hi there! I can help with questions about Japa Genie's features, pricing, and how it works. For specific visa questions, please use the main AI Assistant."
     }
   ]);
   const [input, setInput] = useState('');
@@ -46,7 +46,7 @@ export function ChatPanel() {
     setIsLoading(true);
 
     try {
-      const result = await visaChatAssistant({ question: currentInput });
+      const result = await siteAssistant({ question: currentInput });
       if (result.answer) {
         setMessages((prev) => [...prev, { role: 'assistant', content: result.answer }]);
       } else {
@@ -83,7 +83,7 @@ export function ChatPanel() {
       <SheetHeader className="p-4 border-b">
         <SheetTitle className="flex items-center gap-2">
             <JapaGenieLogo className="w-6 h-6 text-accent"/>
-            Japa Genie Assistant
+            Japa Genie Guide
         </SheetTitle>
         <SheetDescription>
           Ask questions about our services, pricing, or features.
@@ -145,7 +145,7 @@ export function ChatPanel() {
           <Input
             value={input}
             onChange={handleInputChange}
-            placeholder="Ask a question..."
+            placeholder="Ask about features or pricing..."
             disabled={isLoading}
             className="flex-1"
           />
