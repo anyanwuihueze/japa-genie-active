@@ -105,8 +105,9 @@
 }
 
 .chat-wallpaper {
-  background-image: url('/genie-chat-wallpaper.jpg');
+  background-image: url('/wallpaper/genie-chat-wallpaper.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
 }
