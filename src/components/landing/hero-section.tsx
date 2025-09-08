@@ -19,7 +19,7 @@ export function HeroSection() {
           <div className={`flex flex-col justify-center space-y-6 transition-all duration-1000 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter bg-gradient-to-r from-amber-400 to-primary bg-clip-text text-transparent">
-                STOP Getting Scammed by Visa Agents. START Getting Real Results.
+                STOP Getting <span className="text-red-500">Scammed</span> by <span className="text-red-500">Fake</span> Visa Agents. START Getting Real Results.
               </h1>
               <p className="max-w-[600px] text-slate-300 md:text-xl">
                 Japa Genie is your AI-powered guide for navigating the complex world of visas. Get personalized recommendations and a clear roadmap to your destination.
