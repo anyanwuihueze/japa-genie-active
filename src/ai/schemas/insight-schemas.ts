@@ -35,6 +35,6 @@ export const InsightOutputSchema = z.object({
             name: z.string().describe("The name of the data point (e.g., a country, a city, a category)."),
             value: z.number().describe("The numeric value of the data point."),
         })).describe("An array of data points for a bar chart.")
-    }).describe("Data suitable for generating a simple bar chart.")
+    }).optional().describe("Data suitable for generating a simple bar chart. This field is optional.")
 });
 export type InsightOutput = z.infer<typeof InsightOutputSchema>;
