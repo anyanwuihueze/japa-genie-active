@@ -31,7 +31,7 @@ export function HeroSection() {
                 className="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-8 py-6 text-lg font-bold animate-glow"
                 asChild
               >
-                <Link href="/dashboard" className="flex items-center gap-2">
+                <Link href="/chat" className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                   <span>Start Your Journey</span>
                 </Link>

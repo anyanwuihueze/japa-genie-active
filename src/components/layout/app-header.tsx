@@ -70,7 +70,7 @@ export function AppHeader() {
                 <Link href="/dashboard">Log In</Link>
             </Button>
              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-                <Link href="/dashboard">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link href="/chat">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
         </div>
 

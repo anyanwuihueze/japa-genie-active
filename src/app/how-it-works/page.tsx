@@ -68,7 +68,7 @@ export default function HowItWorksPage() {
         <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
         <p className="text-muted-foreground mb-6">Let Japa Genie be your trusted guide.</p>
         <Button asChild size="lg">
-          <Link href="/dashboard">Get Started Now <Sparkles className="ml-2 w-4 h-4" /></Link>
+          <Link href="/chat">Get Started Now <Sparkles className="ml-2 w-4 h-4" /></Link>
         </Button>
       </div>
     </div>

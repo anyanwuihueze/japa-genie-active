@@ -51,7 +51,7 @@ export default function FeaturesPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Link href="/dashboard" key={index} className="block group">
+            <Link href="/chat" key={index} className="block group">
                 <Card className="flex flex-col text-center items-center p-8 transition-all hover:shadow-xl hover:-translate-y-1 h-full">
                   <div className="mb-4 bg-primary/10 text-primary rounded-full p-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <feature.icon className="w-8 h-8" />
@@ -67,8 +67,8 @@ export default function FeaturesPage() {
 
         <div className="text-center mt-16">
           <Button asChild size="lg" className="bg-gradient-to-r from-amber-400 to-primary text-primary-foreground hover:shadow-lg transition-shadow rounded-full px-10 py-6 text-lg font-bold">
-            <Link href="/dashboard">
-              Explore All Features <ArrowRight className="ml-2 w-5 h-5" />
+            <Link href="/chat">
+              Get Answers Now <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
         </div>
