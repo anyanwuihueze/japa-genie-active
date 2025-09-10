@@ -1,160 +1,200 @@
+// FILE: src/components/layout/chat-panel.tsx
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
-import { generateInsights } from '@/ai/flows/insights-generator';
-import type { InsightOutput } from '@/ai/schemas/insight-schemas';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { JapaGenieLogo } from '@/components/icons';
-import { Loader2, Send, User } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useToast } from '@/hooks/use-toast';
+import { siteAssistant } from '@/ai/flows/site-assistant-flow';
+import { useRouter } from 'next/navigation';
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetDescription,
+} from '@/components/ui/sheet';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'; // ✅ Required by Radix for accessibility
 
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
+// Define the component as `ChatPanel` (NOT default)
+export function ChatPanel() {
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
+    {
+      role: 'assistant',
+      content:
+        'Hi there! I’m your Japa Genie guide 👋 Ask me anything about relocation, pricing, or how we help you move abroad. You’ve got 5 free questions — then unlock 3 powerful visa wishes inside!',
+    },
+  ]);
+  const [currentInput, setCurrentInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [questionCount, setQuestionCount] = useState(0);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
-interface ChatClientProps {
-    insights: InsightOutput | null;
-    onNewInsights: (insights: InsightOutput) => void;
-    onInsightsLoading: (loading: boolean) => void;
-}
+  const MAX_FREE_QUESTIONS = 5;
 
-export default function ChatClient({ onNewInsights, onInsightsLoading }: ChatClientProps) {
-  const { toast } = useToast();
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
+  // Focus input on mount
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    const trimmed = currentInput.trim();
+    if (!trimmed || isTyping) return;
 
-    const userMessage: Message = { role: 'user', content: input };
-    setMessages((prev) => [...prev, userMessage]);
-    const currentInput = input;
-    setInput('');
-    setIsLoading(true);
-    onInsightsLoading(true);
+    // Add user message
+    setMessages((prev) => [...prev, { role: 'user', content: trimmed }]);
+    setCurrentInput('');
+    setIsTyping(true);
 
     try {
-      const [chatResult, insightResult] = await Promise.all([
-        visaChatAssistant({ question: currentInput }),
-        generateInsights({ question: currentInput }),
-      ]);
-      
-      onNewInsights(insightResult);
+      const result = await siteAssistant({ question: trimmed });
+      const aiResponse = result.answer;
 
-      if (chatResult.answer) {
-        setMessages((prev) => [...prev, { role: 'assistant', content: chatResult.answer }]);
-      } else {
-         throw new Error("The AI assistant did not provide an answer.");
-      }
+      // Add assistant response
+      setMessages((prev) => [...prev, { role: 'assistant', content: aiResponse }]);
 
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
-      setMessages((prev) => [...prev, { role: 'assistant', content: `Sorry, I ran into a problem: ${errorMessage}` }]);
-      toast({
-        variant: 'destructive',
-        title: 'Chat Error',
-        description: errorMessage,
+      // Increment question count
+      setQuestionCount((prev) => {
+        const newCount = prev + 1;
+        if (newCount >= MAX_FREE_QUESTIONS) {
+          setTimeout(() => {
+            setShowEmailModal(true);
+          }, 1000);
+        }
+        return newCount;
       });
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content:
+            'Oops! I had trouble responding. Please check your connection and try again.',
+        },
+      ]);
     } finally {
-      setIsLoading(false);
-      onInsightsLoading(false);
+      setIsTyping(false);
     }
   };
 
-  useEffect(() => {
-    if (scrollAreaRef.current) {
-        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
-        if (viewport) {
-            viewport.scrollTo({
-                top: viewport.scrollHeight,
-                behavior: 'smooth'
-            });
-        }
-    }
-  }, [messages]);
+  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = (e.currentTarget.email as HTMLInputElement).value;
 
+    if (!email) return;
+
+    localStorage.setItem('userEmail', email);
+    setShowEmailModal(false);
+    router.push('/chat');
+  };
 
   return (
-    <div className="flex flex-col flex-1 bg-card h-full bg-world-map">
-      <ScrollArea className="flex-1 h-full" ref={scrollAreaRef}>
-        <div className="space-y-6 p-4">
-          {messages.map((message, index) => (
+    <>
+      {/* Chat Interface */}
+      <div className="flex flex-col h-screen max-w-2xl mx-auto border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">
+        {/* Messages */}
+        <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50">
+          {messages.map((msg, idx) => (
             <div
-              key={index}
-              className={cn(
-                'flex items-start gap-4',
-                message.role === 'user' ? 'justify-end' : 'justify-start'
-              )}
+              key={idx}
+              className={`flex ${
+                msg.role === 'user' ? 'justify-end' : 'justify-start'
+              }`}
             >
-              {message.role === 'assistant' && (
-                <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-muted">
-                    <JapaGenieLogo className="w-5 h-5 text-accent" />
-                  </AvatarFallback>
-                </Avatar>
-              )}
               <div
-                className={cn(
-                  'max-w-md p-3 rounded-xl',
-                   message.role === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
-                )}
+                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg text-sm ${
+                  msg.role === 'user'
+                    ? 'bg-blue-500 text-white rounded-br-none'
+                    : 'bg-white text-gray-800 border rounded-bl-none shadow'
+                }`}
               >
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                {msg.content}
               </div>
-              {message.role === 'user' && (
-                <Avatar className="w-8 h-8">
-                  <AvatarFallback>
-                    <User size={20} />
-                  </AvatarFallback>
-                </Avatar>
-              )}
             </div>
           ))}
-           {isLoading && (
-             <div className="flex items-start gap-4 justify-start">
-                <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-muted">
-                    <JapaGenieLogo className="w-5 h-5 text-accent" />
-                  </AvatarFallback>
-                </Avatar>
-                <div className="bg-muted p-3 rounded-xl flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <span className="text-sm text-muted-foreground">Thinking...</span>
-                </div>
+          {isTyping && (
+            <div className="flex justify-start">
+              <div className="bg-white border border-gray-200 px-4 py-2 rounded-lg rounded-bl-none shadow max-w-xs">
+                Japa Genie is typing...
+              </div>
             </div>
-           )}
+          )}
         </div>
-      </ScrollArea>
-      <div className="p-4 border-t mt-auto">
-        <form onSubmit={handleSubmit} className="flex gap-4">
-          <Input
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Ask about visa types, requirements, or processes..."
-            disabled={isLoading}
-            className="flex-1"
-          />
-          <Button type="submit" disabled={isLoading || !input.trim()}>
-            <Send className="w-4 h-4 mr-2" />
-            Send
-          </Button>
+
+        {/* Input Form */}
+        <form onSubmit={handleSubmit} className="p-4 bg-white border-t">
+          <div className="flex gap-2">
+            <input
+              ref={inputRef}
+              type="text"
+              value={currentInput}
+              onChange={(e) => setCurrentInput(e.target.value)}
+              placeholder="Ask about visas, countries, or how to move abroad..."
+              className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              disabled={isTyping}
+            />
+            <button
+              type="submit"
+              disabled={isTyping || !currentInput.trim()}
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition flex items-center justify-center min-w-[80px]"
+            >
+              {isTyping ? '...' : 'Send'}
+            </button>
+          </div>
+          <p className="text-xs text-gray-500 mt-2 text-center">
+            {MAX_FREE_QUESTIONS - questionCount} free questions remaining
+          </p>
         </form>
       </div>
-    </div>
+
+      {/* Email Capture Sheet (Accessible with VisuallyHidden) */}
+      {showEmailModal && (
+        <Sheet open={showEmailModal} onOpenChange={setShowEmailModal}>
+          <SheetContent className="sm:max-w-sm">
+            {/* ✅ CORRECT: Required by Radix UI for accessibility */}
+            <VisuallyHidden asChild>
+              <SheetTitle>Unlock Your 3 Visa Wishes</SheetTitle>
+            </VisuallyHidden>
+            <VisuallyHidden asChild>
+              <SheetDescription>
+                Enter your email to unlock your 3 personalized visa wishes with Japa Genie.
+              </SheetDescription>
+            </VisuallyHidden>
+
+            {/* Visible Content */}
+            <div className="text-center space-y-4 p-2">
+              <h3 className="text-xl font-bold text-gray-800">Unlock Your 3 Visa Wishes! ✨</h3>
+              <p className="text-gray-600">
+                You’ve used all 5 free questions! Enter your email to unlock your 3 personalized visa wishes with Japa Genie.
+              </p>
+              <form onSubmit={handleEmailSubmit} className="space-y-4">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  autoFocus
+                />
+                <div className="flex gap-3 mt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition"
+                  >
+                    Continue to 3 Wishes
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowEmailModal(false)}
+                    className="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium"
+                  >
+                    Maybe Later
+                  </button>
+                </div>
+              </form>
+            </div>
+          </SheetContent>
+        </Sheet>
+      )}
+    </>
   );
 }
