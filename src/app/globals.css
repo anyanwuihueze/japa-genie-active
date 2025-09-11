@@ -103,11 +103,21 @@
   }
 }
 
-/* ✅ Fixed Wallpaper: Cover, No Repeat, Subtle Opacity */
+/* ✅ Wallpaper with subtle built-in pulse animation */
 .chat-wallpaper {
   background-image: url('/wallpaper/genie-chat-wallpaper.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.6; /* Slightly brighter than before */
+  opacity: 0.2;
+  animation: bg-pulse 4s ease-in-out infinite;
+}
+
+@keyframes bg-pulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.28;
+  }
 }

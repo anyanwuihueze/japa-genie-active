@@ -15,7 +15,12 @@ import {
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 
 export default function UserChat() {
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
+    {
+      role: 'assistant',
+      content: "Welcome, Pathfinder! I'm Japa Genie, your magical guide to global relocation. I can grant you 3 powerful wishes to map out your visa journey. What is your first wish?",
+    }
+  ]);
   const [insights, setInsights] = useState<InsightOutput | null>(null);
   const [currentInput, setCurrentInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
