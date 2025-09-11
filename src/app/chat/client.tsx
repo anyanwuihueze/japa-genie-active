@@ -67,8 +67,15 @@ export default function UserChat() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-[calc(100vh-4rem)]">
       {/* Chat Section */}
-      <div className="flex flex-col border-r border-gray-200 relative">
-        <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50/50 relative z-10 chat-wallpaper">
+      <div className="flex flex-col border-r border-gray-200 relative bg-white">
+        {/* ✅ Background Layer - One Large Image, No Repeat */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0 chat-wallpaper" 
+          aria-hidden="true" 
+        />
+
+        {/* Message List */}
+        <div className="flex-1 p-4 overflow-y-auto space-y-3 relative z-10">
           {messages.map((msg, idx) => (
             <div
               key={idx}
