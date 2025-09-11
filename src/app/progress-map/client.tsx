@@ -1,9 +1,12 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { MessageCircleQuestion, CheckCircle2, Map, Repeat, ArrowRight } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+
 
 const features = [
   {
@@ -22,10 +25,10 @@ const features = [
   },
   {
     icon: Map,
-    title: 'View Your Progress Map',
-    description: 'Track every step of your application journey from document gathering to final approval.',
+    title: 'View Your Visa Journey',
+    description: 'See the detailed step-by-step timeline for your entire application process.',
     href: '/progress',
-    cta: 'View Progress',
+    cta: 'View Journey',
   },
   {
     icon: Repeat,
@@ -36,15 +39,36 @@ const features = [
   },
 ];
 
-export default function DashboardClient() {
+export default function ProgressMapClient() {
+  const progressPercentage = 40; // This would be dynamic in a real app
+
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <h1 className="text-4xl font-bold tracking-tight">Welcome to Japa Genie</h1>
+        <h1 className="text-4xl font-bold tracking-tight">Your Progress Map</h1>
         <p className="text-lg text-muted-foreground">
-          Your personal AI guide to visa success. What would you like to do first?
+          Your personalized AI guide to visa success. Here's your journey at a glance.
         </p>
       </header>
+
+      <Card>
+        <CardHeader>
+            <div className="flex justify-between items-center mb-2">
+                <CardTitle className="text-xl">Overall Progress</CardTitle>
+                <Badge variant="secondary">{progressPercentage}% Complete</Badge>
+            </div>
+            <CardDescription>You're well on your way! Keep up the momentum.</CardDescription>
+        </CardHeader>
+        <CardContent>
+            <Progress value={progressPercentage} className="w-full" />
+            <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <span>Application Start</span>
+                <span>Visa Approval</span>
+            </div>
+        </CardContent>
+      </Card>
+
+
       <div className="grid md:grid-cols-2 gap-6">
         {features.map((feature) => (
           <Card key={feature.title} className="flex flex-col group hover:border-primary transition-all">

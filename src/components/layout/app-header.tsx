@@ -67,7 +67,7 @@ export function AppHeader() {
 
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
             <Button variant="ghost" asChild>
-                <Link href="/dashboard">Log In</Link>
+                <Link href="/progress-map">Log In</Link>
             </Button>
              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
                 <Link href="/chat">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>

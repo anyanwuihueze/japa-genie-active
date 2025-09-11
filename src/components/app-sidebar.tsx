@@ -25,9 +25,9 @@ import {
 } from 'lucide-react';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/progress-map', label: 'Progress Map', icon: LayoutDashboard },
   { href: '/interview', label: 'Mock Interview', icon: MessageCircleQuestion },
-  { href: '/progress', label: 'Progress Map', icon: Map },
+  { href: '/progress', label: 'Visa Journey', icon: Map },
   { href: '/document-check', label: 'Document Checker', icon: CheckCircle2 },
   { href: '/rejection-reversal', label: 'Rejection Reversal', icon: Repeat },
   { href: '/chat', label: 'AI Assistant', icon: Bot },
@@ -61,7 +61,7 @@ export function AppSidebar() {
               >
                 <Link href={item.href}>
                   <item.icon />
-                  <span>{item.label}</span>
+                  <span className={item.href === '/progress-map' ? 'text-primary font-bold' : ''}>{item.label}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
