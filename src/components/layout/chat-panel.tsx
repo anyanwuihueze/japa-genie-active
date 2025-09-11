@@ -81,9 +81,15 @@ export function ChatPanel() {
   return (
     <>
       {/* Chat Interface */}
-      <div className="flex flex-col h-screen max-w-2xl mx-auto overflow-hidden">
+      <div className="relative flex flex-col h-screen max-w-2xl mx-auto overflow-hidden bg-gray-50/80">
+        {/* Background Layer */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0 chat-wallpaper" 
+          aria-hidden="true" 
+        />
+
         {/* Messages */}
-        <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50/80 backdrop-blur-sm">
+        <div className="flex-1 p-4 overflow-y-auto space-y-3 backdrop-blur-sm z-10">
           {messages.map((msg, idx) => (
             <div
               key={idx}
@@ -110,7 +116,7 @@ export function ChatPanel() {
         </div>
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className="p-4 bg-white/80 backdrop-blur-sm border-t">
+        <form onSubmit={handleSubmit} className="p-4 bg-white/80 backdrop-blur-sm border-t z-10">
           <div className="flex gap-2">
             <input
               ref={inputRef}
