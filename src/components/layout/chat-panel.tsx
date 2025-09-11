@@ -89,7 +89,7 @@ export function ChatPanel() {
         />
 
         {/* Messages */}
-        <div className="flex-1 p-4 overflow-y-auto space-y-3 backdrop-blur-sm z-10">
+        <div className="flex-1 p-4 overflow-y-auto space-y-3 z-10">
           {messages.map((msg, idx) => (
             <div
               key={idx}
