@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import ChatClient from './client';
+import {ChatPanel as ChatClient} from '@/components/layout/chat-panel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, Repeat } from 'lucide-react';
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';

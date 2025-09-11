@@ -11,9 +11,18 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'; // ✅ Required by Radix for accessibility
+import type { InsightOutput } from '@/ai/schemas/insight-schemas';
 
 // Define the component as `ChatPanel` (NOT default)
-export function ChatPanel() {
+export function ChatPanel({
+  insights,
+  onNewInsights,
+  onInsightsLoading,
+}: {
+  insights: InsightOutput | null;
+  onNewInsights: (insights: InsightOutput | null) => void;
+  onInsightsLoading: (loading: boolean) => void;
+}) {
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
     {
       role: 'assistant',
@@ -46,6 +55,7 @@ export function ChatPanel() {
     setIsTyping(true);
 
     try {
+      onInsightsLoading(true);
       const result = await siteAssistant({ question: trimmed });
       const aiResponse = result.answer;
 
@@ -73,6 +83,7 @@ export function ChatPanel() {
       ]);
     } finally {
       setIsTyping(false);
+      onInsightsLoading(false);
     }
   };
 
