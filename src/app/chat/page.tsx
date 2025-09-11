@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {ChatPanel as ChatClient} from '@/components/layout/chat-panel';
+import {ChatPanel as ChatClient} from './client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Sparkles, Link as LinkIcon, AlertCircle, BarChart, FileText, Repeat } from 'lucide-react';
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
@@ -116,7 +116,7 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <header className="p-4 border-b shrink-0 flex items-center gap-3">
+      <header className="p-4 border-b shrink-0 flex items-center gap-3 bg-card rounded-t-lg">
         <JapaGenieLogo className="w-8 h-8 text-accent" />
         <div>
             <h1 className="text-2xl font-bold tracking-tight">Japa Genie Assistant</h1>
@@ -127,7 +127,7 @@ export default function ChatPage() {
       </header>
       <div className="flex flex-1 overflow-hidden">
         {/* Chat Pane */}
-        <div className="flex-1 flex flex-col overflow-y-auto border-r">
+        <div className="flex-1 flex flex-col overflow-y-auto border-r bg-card">
           <ChatClient 
              insights={insights}
              onNewInsights={setInsights}
@@ -135,7 +135,7 @@ export default function ChatPage() {
           />
         </div>
         {/* Insights Pane */}
-        <div className="hidden md:flex flex-col w-[380px] lg:w-[420px] overflow-y-auto">
+        <div className="hidden md:flex flex-col w-[380px] lg:w-[420px] overflow-y-auto bg-background">
            <Card className="flex-1 flex flex-col rounded-none border-0 border-l">
              <CardHeader className="flex flex-row items-center gap-2 shrink-0 p-4">
                 <Sparkles className="w-5 h-5 text-primary" />
