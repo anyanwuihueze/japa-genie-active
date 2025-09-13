@@ -13,6 +13,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
+import { Badge } from '@/components/ui/badge';
+
+const MAX_WISHES = 3;
 
 export default function UserChat() {
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
@@ -25,6 +28,7 @@ export default function UserChat() {
   const [currentInput, setCurrentInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isInsightsLoading, setIsInsightsLoading] = useState(false);
+  const [wishCount, setWishCount] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -36,8 +40,16 @@ export default function UserChat() {
     const trimmed = currentInput.trim();
     if (!trimmed || isTyping) return;
 
+    const newWishCount = wishCount + 1;
+    setWishCount(newWishCount);
+
     const userMessage = { role: 'user' as const, content: trimmed };
-    setMessages((prev) => [...prev, userMessage]);
+    // Clear initial welcome message on first user message
+    if (newWishCount === 1) {
+        setMessages([userMessage]);
+    } else {
+        setMessages((prev) => [...prev, userMessage]);
+    }
     setCurrentInput('');
     setIsTyping(true);
     setIsInsightsLoading(true);
@@ -45,7 +57,7 @@ export default function UserChat() {
     try {
       // Get both assistant reply and insights in parallel
       const [chatResult, insightResult] = await Promise.all([
-        visaChatAssistant({ question: trimmed }),
+        visaChatAssistant({ question: trimmed, wishCount: newWishCount }),
         generateInsights({ question: trimmed })
       ]);
 
@@ -68,6 +80,8 @@ export default function UserChat() {
       setIsInsightsLoading(false);
     }
   };
+
+  const wishesLeft = MAX_WISHES - wishCount;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-[calc(100vh-4rem)]">
@@ -107,14 +121,22 @@ export default function UserChat() {
         </div>
 
         {/* Input */}
-        <form onSubmit={handleSubmit} className="p-4 bg-white border-t relative z-10">
+        <form onSubmit={handleSubmit} className="p-4 bg-white border-t relative z-10 space-y-2">
+            <div className="flex items-center justify-between px-1">
+                <p className="text-xs text-muted-foreground">Your Personal AI Visa Guide</p>
+                {wishesLeft > 0 ? (
+                    <Badge variant="secondary">{wishesLeft} {wishesLeft === 1 ? 'wish' : 'wishes'} left</Badge>
+                ) : (
+                    <Badge variant="destructive">0 wishes left</Badge>
+                )}
+            </div>
           <div className="flex gap-2">
             <input
               ref={inputRef}
               type="text"
               value={currentInput}
               onChange={(e) => setCurrentInput(e.target.value)}
-              placeholder="Ask for your first wish..."
+              placeholder={wishCount === 0 ? "Ask for your first wish..." : "Ask your next wish..."}
               className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               disabled={isTyping}
             />
