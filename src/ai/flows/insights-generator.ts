@@ -10,7 +10,7 @@
  *
  * Called by: insights-flow.ts
  */
-import { ai, geminiFlash } from '@/ai/genkit';
+import { ai } from '@/ai/genkit';
 import {
   InsightInput,
   InsightInputSchema,
@@ -21,7 +21,7 @@ import {
 // Define the AI prompt using Genkit
 const prompt = ai.definePrompt({
   name: 'insightsGeneratorPrompt',
-  model: geminiFlash,
+  model: 'googleai/gemini-1.5-flash-latest',
   input: { schema: InsightInputSchema },
   output: { schema: InsightOutputSchema },
   prompt: `

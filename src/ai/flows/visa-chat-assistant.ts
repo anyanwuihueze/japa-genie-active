@@ -11,7 +11,7 @@
  * - VisaChatAssistantOutput - Output type for the function
  */
 
-import { ai, geminiFlash } from '@/ai/genkit';
+import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
 // Input schema
@@ -30,7 +30,7 @@ export type VisaChatAssistantOutput = z.infer<typeof VisaChatAssistantOutputSche
 // Define the prompt with genie theme and 3-wish flow
 const prompt = ai.definePrompt({
   name: 'visaChatAssistantPrompt',
-  model: geminiFlash,
+  model: 'googleai/gemini-1.5-flash-latest',
   input: { schema: VisaChatAssistantInputSchema },
   output: { schema: VisaChatAssistantOutputSchema },
   prompt: `You are Japa Genie, the magical AI visa expert who grants wishes for international relocation!

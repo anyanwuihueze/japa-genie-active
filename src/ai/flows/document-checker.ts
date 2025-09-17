@@ -10,7 +10,7 @@
  * - DocumentCheckerOutput - The return type for the documentChecker function.
  */
 
-import {ai, geminiFlash} from '@/ai/genkit';
+import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const DocumentCheckerInputSchema = z.object({
@@ -33,7 +33,7 @@ export async function documentChecker(input: DocumentCheckerInput): Promise<Docu
 
 const documentCheckerPrompt = ai.definePrompt({
   name: 'documentCheckerPrompt',
-  model: geminiFlash,
+  model: 'googleai/gemini-1.5-flash-latest',
   input: {schema: DocumentCheckerInputSchema},
   output: {schema: DocumentCheckerOutputSchema},
   prompt: `You are an AI assistant that checks visa application documents for errors.

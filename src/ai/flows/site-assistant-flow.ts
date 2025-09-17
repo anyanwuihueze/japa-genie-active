@@ -7,7 +7,7 @@
  * It is designed to engage visitors, build excitement, and guide them toward signing up.
  */
 
-import { ai, geminiFlash } from '@/ai/genkit';
+import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
 // Input schema
@@ -25,7 +25,7 @@ export type SiteAssistantOutput = z.infer<typeof SiteAssistantOutputSchema>;
 // Define the prompt with natural, engaging tone (NO script repetition)
 const prompt = ai.definePrompt({
   name: 'siteAssistantPrompt',
-  model: geminiFlash,
+  model: 'googleai/gemini-1.5-flash-latest',
   input: { schema: SiteAssistantInputSchema },
   output: { schema: SiteAssistantOutputSchema },
   prompt: `You are an enthusiastic and persuasive sales assistant for Japa Genie, a smart AI-powered visa guidance platform. Your job is to engage visitors on the landing page, build excitement about international relocation, and guide them toward signing up.

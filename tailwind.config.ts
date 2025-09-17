@@ -28,24 +28,11 @@ const config = {
         fadeInUp: {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" }
-        },
-        // For animated chat bubbles
-        "chat-bubble-in": {
-          "0%": { opacity: "0", transform: "translateY(10px) scale(0.95)" },
-          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
-        },
-        // For floating background flags
-        "background-float": {
-            "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-            "25%": { transform: "translateY(-15px) rotate(5deg)" },
-            "75%": { transform: "translateY(10px) rotate(-5deg)" },
         }
       },
       animation: {
         float: "float 6s ease-in-out infinite",
-        fadeInUp: "fadeInUp 0.8s ease-out",
-        "chat-bubble-in": "chat-bubble-in 0.5s ease-out forwards",
-        "background-float": "background-float 15s ease-in-out infinite",
+        fadeInUp: "fadeInUp 0.8s ease-out"
       }
     }
   },
