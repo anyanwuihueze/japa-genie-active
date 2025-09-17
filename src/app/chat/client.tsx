@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
-import { generateInsights } from '@/ai/flows/insights-flow';
+// import { generateInsights } from '@/ai/flows/insights-flow'; // Temporarily disabled
 import {
   BarChart,
   Bar,
@@ -52,20 +52,18 @@ export default function UserChat() {
     }
     setCurrentInput('');
     setIsTyping(true);
-    setIsInsightsLoading(true);
+    // setIsInsightsLoading(true); // Temporarily disabled
 
     try {
-      // Get both assistant reply and insights in parallel
-      const [chatResult, insightResult] = await Promise.all([
-        visaChatAssistant({ question: trimmed, wishCount: newWishCount }),
-        generateInsights({ question: trimmed })
-      ]);
+      // Get only the assistant reply
+      const chatResult = await visaChatAssistant({ question: trimmed, wishCount: newWishCount });
 
       const aiResponse = chatResult.answer;
       setMessages((prev) => [...prev, { role: 'assistant', content: aiResponse }]);
-      setInsights(insightResult);
+      // setInsights(null); // Insights are disabled for now
 
     } catch (err) {
+      console.error("Chat error:", err); // Log the actual error
       setMessages((prev) => [
         ...prev,
         {
@@ -77,7 +75,7 @@ export default function UserChat() {
       setInsights(null);
     } finally {
       setIsTyping(false);
-      setIsInsightsLoading(false);
+      // setIsInsightsLoading(false); // Temporarily disabled
     }
   };
 
