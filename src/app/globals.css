@@ -71,9 +71,6 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   html {
     scroll-behavior: smooth;
   }
@@ -91,6 +88,9 @@
   section {
     @apply py-16;
   }
+  
+  /* The border-* properties below are now applied directly in components where needed */
+  /* e.g., in card.tsx: className="rounded-lg border bg-card text-card-foreground shadow-sm" */
 }
 
 @layer components {
