@@ -3,6 +3,10 @@
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 
+const HowItWorksAnimated = dynamic(() => import('@/components/landing/how-it-works-animated').then(mod => mod.HowItWorksAnimated), {
+    loading: () => <Skeleton className="h-[600px] w-full" />,
+    ssr: false,
+});
 const MockInterviewSection = dynamic(() => import('@/components/landing/mock-interview-section').then(mod => mod.MockInterviewSection), {
   loading: () => <Skeleton className="h-[500px] w-full" />,
 });
@@ -13,6 +17,7 @@ const TestimonialsSection = dynamic(() => import('@/components/landing/testimoni
 export default function LandingClient() {
   return (
     <>
+      <HowItWorksAnimated />
       <MockInterviewSection />
       <TestimonialsSection />
     </>
