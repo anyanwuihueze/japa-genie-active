@@ -1,25 +1,12 @@
 import { HeroSection } from '@/components/landing/hero-section';
-import dynamic from 'next/dynamic';
-import { Skeleton } from '@/components/ui/skeleton';
-
-const MockInterviewSection = dynamic(() => import('@/components/landing/mock-interview-section').then(mod => mod.MockInterviewSection), {
-  loading: () => <Skeleton className="h-[500px] w-full" />,
-});
-const TestimonialsSection = dynamic(() => import('@/components/landing/testimonials-section').then(mod => mod.TestimonialsSection), {
-    loading: () => <Skeleton className="h-[400px] w-full" />,
-});
-const FeaturesPage = dynamic(() => import('./features/page'), {
-    loading: () => <Skeleton className="h-[600px] w-full" />,
-});
+import LandingClient from '@/components/landing/landing-client';
 
 // Main landing page for the application
 export default function Home() {
   return (
-    <div>
+    <>
       <HeroSection />
-      <MockInterviewSection />
-      <TestimonialsSection />
-      <FeaturesPage />
-    </div>
+      <LandingClient />
+    </>
   );
 }
