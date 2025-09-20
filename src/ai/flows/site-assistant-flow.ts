@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -64,8 +65,8 @@ User Question: {{{question}}}
 Now, respond in a natural, engaging, and sales-smart way that moves the user toward signing up.`,
 });
 
-// Define the flow
-const siteAssistantFlow = ai.defineFlow(
+// Define the flow and export it so it can be used in the new API route
+export const siteAssistantFlow = ai.defineFlow(
   {
     name: 'siteAssistantFlow',
     inputSchema: SiteAssistantInputSchema,
@@ -80,7 +81,7 @@ const siteAssistantFlow = ai.defineFlow(
   }
 );
 
-// Export the callable function
+// Export the callable function for potential direct server-side use
 export async function siteAssistant(input: SiteAssistantInput): Promise<SiteAssistantOutput> {
   return siteAssistantFlow(input);
 }
