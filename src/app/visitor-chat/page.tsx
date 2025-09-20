@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { MessageCircle } from 'lucide-react';
-import ChatPanel from './chat-panel';
+import ChatPanel from '@/components/layout/chat-panel';
 
-export function FloatingChatButton() {
+export default function VisitorChatPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <Button
         onClick={() => setIsOpen(true)}
         size="icon"
@@ -29,6 +29,6 @@ export function FloatingChatButton() {
           </div>
         </SheetContent>
       </Sheet>
-    </>
+    </div>
   );
 }

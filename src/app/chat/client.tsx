@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { runFlow } from '@genkit-ai/next/client';
-// Remove the direct import since we'll use API route
 import {
   BarChart,
   Bar,
@@ -13,6 +12,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import type { InsightOutput } from '@/ai/schemas/insight-schemas';
+import type { VisaChatAssistantOutput } from '@/ai/flows/visa-chat-assistant';
 import { Badge } from '@/components/ui/badge';
 
 const MAX_WISHES = 3;
@@ -45,7 +45,7 @@ export default function UserChat() {
 
     const userMessage = { role: 'user' as const, content: trimmed };
     // Clear initial welcome message on first user message
-    if (newWishCount === 1) {
+    if (newWishCount === 1 && messages.length === 1) {
         setMessages([userMessage]);
     } else {
         setMessages((prev) => [...prev, userMessage]);
@@ -56,12 +56,15 @@ export default function UserChat() {
 
     try {
       // Get chat response using the new API route
-      const chatResult = await runFlow({
+      const chatResult: VisaChatAssistantOutput = await runFlow({
         url: '/api/chat',
-        input: { message: trimmed }
+        input: { 
+          question: trimmed,
+          wishCount: newWishCount,
+         }
       });
 
-      const aiResponse = chatResult.response;
+      const aiResponse = chatResult.answer;
       setMessages((prev) => [...prev, { role: 'assistant', content: aiResponse }]);
 
       // Generate insights using API route
@@ -133,7 +136,7 @@ export default function UserChat() {
                 {wishesLeft > 0 ? (
                     <Badge variant="secondary">{wishesLeft} {wishesLeft === 1 ? 'wish' : 'wishes'} left</Badge>
                 ) : (
-                    <Badge variant="secondary">0 wishes left</Badge>
+                    <Badge variant="destructive">0 wishes left</Badge>
                 )}
             </div>
           <div className="flex gap-2">

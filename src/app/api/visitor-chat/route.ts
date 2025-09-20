@@ -1,34 +1,26 @@
-'use client';
+import { NextRequest, NextResponse } from 'next/server';
+import { siteAssistant } from '@/ai/flows/site-assistant-flow';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { MessageCircle } from 'lucide-react';
-import ChatPanel from './chat-panel';
+export async function POST(request: NextRequest) {
+  try {
+    const { message, conversationHistory } = await request.json();
 
-export function FloatingChatButton() {
-  const [isOpen, setIsOpen] = useState(false);
+    // Call the site assistant flow with the correct parameter format
+    const response = await siteAssistant({ question: message });
 
-  return (
-    <>
-      <Button
-        onClick={() => setIsOpen(true)}
-        size="icon"
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform hover:scale-110"
-        aria-label="Open AI Chat"
-      >
-        <MessageCircle className="h-7 w-7" />
-      </Button>
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent className="w-full max-w-md p-0 flex flex-col">
-          <SheetHeader className="p-4 border-b">
-            <SheetTitle>Japa Genie Assistant</SheetTitle>
-          </SheetHeader>
-          <div className="flex-1 overflow-y-auto">
-            <ChatPanel />
-          </div>
-        </SheetContent>
-      </Sheet>
-    </>
-  );
+    return NextResponse.json({ 
+      response: response.answer, // FIXED: Use response.answer instead of response.answer
+      success: true 
+    });
+
+  } catch (error) {
+    console.error('Visitor chat API error:', error);
+    return NextResponse.json(
+      { 
+        error: 'Failed to process message',
+        success: false 
+      },
+      { status: 500 }
+    );
+  }
 }
