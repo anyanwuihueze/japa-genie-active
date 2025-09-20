@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { visaChatAssistant } from '@/ai/flows/visa-chat-assistant';
-// import { generateInsights } from '@/ai/flows/insights-flow'; // Temporarily disabled
+import { runFlow } from '@genkit-ai/next/client';
+// Remove the direct import since we'll use API route
 import {
   BarChart,
   Bar,
@@ -52,18 +52,27 @@ export default function UserChat() {
     }
     setCurrentInput('');
     setIsTyping(true);
-    // setIsInsightsLoading(true); // Temporarily disabled
+    setIsInsightsLoading(true);
 
     try {
-      // Get only the assistant reply
-      const chatResult = await visaChatAssistant({ question: trimmed, wishCount: newWishCount });
+      // Get chat response using the new API route
+      const chatResult = await runFlow({
+        url: '/api/chat',
+        input: { message: trimmed }
+      });
 
-      const aiResponse = chatResult.answer;
+      const aiResponse = chatResult.response;
       setMessages((prev) => [...prev, { role: 'assistant', content: aiResponse }]);
-      // setInsights(null); // Insights are disabled for now
+
+      // Generate insights using API route
+      const insightsResult = await runFlow({
+        url: '/api/insights',
+        input: { question: trimmed }
+      });
+      setInsights(insightsResult);
 
     } catch (err) {
-      console.error("Chat error:", err); // Log the actual error
+      console.error("Chat error:", err);
       setMessages((prev) => [
         ...prev,
         {
@@ -71,11 +80,10 @@ export default function UserChat() {
           content: 'Oops! Something went wrong. Please check your connection and try again.',
         },
       ]);
-      // Clear insights on error
       setInsights(null);
     } finally {
       setIsTyping(false);
-      // setIsInsightsLoading(false); // Temporarily disabled
+      setIsInsightsLoading(false);
     }
   };
 
@@ -125,7 +133,7 @@ export default function UserChat() {
                 {wishesLeft > 0 ? (
                     <Badge variant="secondary">{wishesLeft} {wishesLeft === 1 ? 'wish' : 'wishes'} left</Badge>
                 ) : (
-                    <Badge variant="destructive">0 wishes left</Badge>
+                    <Badge variant="secondary">0 wishes left</Badge>
                 )}
             </div>
           <div className="flex gap-2">
