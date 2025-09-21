@@ -38,14 +38,11 @@ const conversations = [
   },
 ];
 
-/* ----------  flags (force colour)  ---------- */
-const countryFlags = ['🇨🇦', '🇬🇧', '🇦🇺', '🇺🇸', '🇩🇪', '🇫🇷'];
-
 export function HowItWorksAnimated() {
   const [demoIndex, setDemoIndex] = useState(0);
   const [msgIndex, setMsgIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const obs = new IntersectionObserver(([e]) => e.isIntersecting && setIsVisible(true), { threshold: 0.3 });
@@ -74,22 +71,20 @@ export function HowItWorksAnimated() {
 
   return (
     <section ref={sectionRef} className="relative py-20 overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-      {/* flags – forced colour & no purge */}
+      
+      {/* Replaced flags with subtle floating dots */}
       <div className="absolute inset-0 pointer-events-none">
-        {countryFlags.map((flag, i) => (
-          <span
+        {[...Array(6)].map((_, i) => (
+          <div
             key={i}
-            className="absolute text-3xl"
+            className="absolute w-1 h-1 bg-blue-300 rounded-full opacity-60 animate-pulse"
             style={{
-              top: `${15 + i * 10}%`,
-              left: i % 2 === 0 ? `${8 + i * 5}%` : undefined,
-              right: i % 2 === 1 ? `${8 + i * 5}%` : undefined,
-              animation: `float 8s ease-in-out infinite`,
-              animationDelay: `${i * 1.2}s`,
+              top: `${15 + Math.random() * 70}%`,
+              left: `${10 + Math.random() * 80}%`,
+              animationDelay: `${i * 0.7}s`,
+              animationDuration: '2s',
             }}
-          >
-            {flag}
-          </span>
+          />
         ))}
       </div>
 
@@ -112,7 +107,7 @@ export function HowItWorksAnimated() {
                 <div><p className="font-semibold text-sm">Japa Genie</p><p className="text-xs text-green-500">Online</p></div>
               </div>
 
-              {/* messages – INSTANT FULL TEXT (no gibberish) */}
+              {/* messages */}
               <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-gray-50">
                 {visibleMsgs.map((m, i) => (
                   <div key={i} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
