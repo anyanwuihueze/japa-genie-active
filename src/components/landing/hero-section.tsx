@@ -37,9 +37,9 @@ export function HeroSection() {
                 </Link>
               </Button>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="lg"
-                className="text-slate-300 border-slate-700 hover:bg-slate-800 hover:text-slate-50 group flex items-center gap-1"
+                className="text-slate-300 hover:bg-slate-800 hover:text-slate-50 group flex items-center gap-1"
                 asChild
               >
                 <Link href="/how-it-works">

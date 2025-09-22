@@ -5,10 +5,9 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { JapaGenieLogo } from "@/components/icons";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Phone } from "lucide-react";
 import { cn } from '@/lib/utils';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-
 
 export function AppHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,10 +25,11 @@ export function AppHeader() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
 
+  // ✅ UPDATED LINKS — Human-first, pain-point focused
   const navLinks = [
-    { href: "/features", label: "Features" },
-    { href: "/how-it-works", label: "How it Works" },
-    { href: "/pricing", label: "Pricing" },
+    { href: "/where-youre-stuck", label: "Where You're Stuck" },
+    { href: "/your-next-steps", label: "Your Next Steps" },
+    { href: "/talk-to-someone", label: "Talk to Someone Like You" },
   ];
   
   const NavLinkItems = () => (
@@ -56,24 +56,31 @@ export function AppHeader() {
         <div className="mr-4 hidden md:flex">
           <SidebarTrigger />
         </div>
+        
         <Link href="/" className="mr-6 flex items-center gap-2">
           <JapaGenieLogo className="w-7 h-7 text-accent" />
           <span className="font-bold text-lg hidden sm:inline-block">Japa Genie</span>
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <NavLinkItems />
         </nav>
 
+        {/* Auth Buttons */}
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
-            <Button variant="ghost" asChild>
-                <Link href="/progress-map">Log In</Link>
-            </Button>
-             <Button className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-                <Link href="/chat">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/progress-map">Log In</Link>
+          </Button>
+          <Button 
+            className="bg-primary hover:bg-primary/90 text-primary-foreground" 
+            asChild
+          >
+            <Link href="/chat">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
+          </Button>
         </div>
 
+        {/* Mobile Menu Toggle */}
         <div className="flex items-center md:hidden ml-2">
           <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -82,11 +89,12 @@ export function AppHeader() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-t">
           <div className="container py-4">
-             <nav className="flex flex-col items-start gap-4">
-                <NavLinkItems />
+            <nav className="flex flex-col items-start gap-4">
+              <NavLinkItems />
             </nav>
           </div>
         </div>
