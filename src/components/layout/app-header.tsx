@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { JapaGenieLogo } from "@/components/icons";
-import { Menu, X, ArrowRight, Phone } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from '@/lib/utils';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 
@@ -25,11 +25,12 @@ export function AppHeader() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
 
-  // ✅ UPDATED LINKS — Human-first, pain-point focused
+  // ✅ FINAL NAV LINKS - Human-first, accurate, no false promises
   const navLinks = [
     { href: "/where-youre-stuck", label: "Where You're Stuck" },
+    { href: "/how-it-helps", label: "How It Helps" },
     { href: "/your-next-steps", label: "Your Next Steps" },
-    { href: "/talk-to-someone", label: "Talk to Someone Like You" },
+    { href: "/about-us", label: "About Us" },
   ];
   
   const NavLinkItems = () => (
